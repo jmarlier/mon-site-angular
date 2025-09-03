@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mon-site-perso-ssr": {
+    "mon-site-perso": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -66,10 +66,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mon-site-perso-ssr:build:production"
+              "buildTarget": "mon-site-perso:build:production"
             },
             "development": {
-              "buildTarget": "mon-site-perso-ssr:build:development"
+              "buildTarget": "mon-site-perso:build:development"
             }
           },
           "defaultConfiguration": "development"
