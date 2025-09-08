@@ -1,0 +1,36 @@
+<header class="main-header" [class.shrink]="isShrunk">
+    <div class="container">
+        <div class="logo">
+            <a routerLink="/">
+                @if (isShrunk) {
+                &lt;/&gt;
+                } @else {
+                &lt;Jérôme MARLIER&gt;&lt;/&gt;
+                }
+            </a>
+        </div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" #menuToggle />
+        <label for="menu-toggle" class="menu-icon" aria-label="Ouvrir le menu"
+            [attr.aria-expanded]="menuToggle?.checked" aria-controls="main-nav">&#9776;</label>
+
+        <nav class="nav-menu" id="main-nav" aria-label="Navigation principale">
+            <a routerLink="/" routerLinkActive="active" #rlaHome="routerLinkActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [attr.aria-current]="rlaHome.isActive ? 'page' : null">Accueil</a>
+            <a routerLink="/about" routerLinkActive="active" #rlaAbout="routerLinkActive"
+                [attr.aria-current]="rlaAbout.isActive ? 'page' : null">À propos</a>
+            <a routerLink="/skills" routerLinkActive="active" #rlaSkills="routerLinkActive"
+                [attr.aria-current]="rlaSkills.isActive ? 'page' : null">Compétences</a>
+            <a routerLink="/portfolio" routerLinkActive="active" #rlaPortfolio="routerLinkActive"
+                [attr.aria-current]="rlaPortfolio.isActive ? 'page' : null">Prestations</a>
+            <a routerLink="/contact" routerLinkActive="active" #rlaContact="routerLinkActive"
+                [attr.aria-current]="rlaContact.isActive ? 'page' : null">Contact</a>
+            <span class="underline"></span>
+            <button class="theme-toggle" (click)="toggleTheme()" aria-label="Changer de thème">
+                <img [src]="isDarkMode ? '/icons/sun.svg' : '/icons/moon.svg'"
+                    [alt]="isDarkMode ? 'Activer le mode clair' : 'Activer le mode sombre'" width="24" height="24" />
+            </button>
+        </nav>
+    </div>
+</header>

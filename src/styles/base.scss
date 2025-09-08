@@ -1,0 +1,68 @@
+// ==========================
+// base.scss
+// ==========================
+
+@use 'sass:color';
+@use './variables' as *;
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-main;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Improve native UI in dark mode */
+html[data-theme='dark'] { color-scheme: dark; }
+
+/* Diagnostic + robust fallback: force text/background to follow variables in dark mode */
+html, body { background-color: var(--color-bg); color: var(--color-text); }
+
+// Reserve space for the fixed surbar so all content (including header) starts below it
+body { padding-top: 0; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+    color: color.adjust($color-secondary, $lightness: 10%);
+    }
+}
+
+header,
+footer {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}

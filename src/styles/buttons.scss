@@ -1,0 +1,92 @@
+// ==========================
+// buttons.scss
+// ==========================
+
+@use 'sass:color';
+@use './variables' as *;
+
+
+// === Bouton de base
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  line-height: 1.2;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.3); // accent focus
+  }
+}
+
+// === Bouton principal
+.button-primary {
+  @extend .button;
+  background-color: var(--color-accent);
+  color: #fff;
+
+  &:hover {
+    background-color: color.adjust($color-secondary, $lightness: -10%);
+  }
+}
+
+// === Bouton secondaire
+.button-secondary {
+  @extend .button;
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+
+  &:hover {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+}
+
+// === Bouton neutre (clair/sombre adaptatif)
+.button-muted {
+  @extend .button;
+  background-color: var(--color-muted);
+  color: var(--color-bg);
+
+  &:hover {
+    background-color: color.adjust(#999, $lightness: -10%);
+  }
+}
+
+// === Taille réduite
+.button-sm {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+// === Icône uniquement
+.button-icon {
+  @extend .button;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// === Alias pour classes utilitaires utilisées dans les templates
+.btn { @extend .button; }
+.btn-primary { @extend .button-primary; }
+.btn-secondary { @extend .button-secondary; }
+.btn-muted { @extend .button-muted; }
+.btn-sm { @extend .button-sm; }

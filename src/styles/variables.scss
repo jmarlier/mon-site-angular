@@ -1,0 +1,56 @@
+// ==========================
+// variables.scss
+// ==========================
+
+// === Polices
+$font-main: 'DM Sans', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.6;
+
+// === Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// === Spacings
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 2rem;
+$spacing-lg: 3rem;
+$spacing-xl: 4rem;
+$spacing-unit: 1rem;
+
+// === Couleurs SCSS (non dynamiques)
+$color-secondary: #667eea; // aligné avec la charte
+$color-danger: #e63946;
+$color-success: #38b000;
+
+// === Custom properties CSS dynamiques (mode clair/sombre)
+// Variables non liées au thème (toujours disponibles)
+:root {
+  --surbar-height: 40px; // hauteur de la surbar en haut
+  --surbar-border: 1px;  // épaisseur de la bordure de la surbar
+}
+
+// Thème clair (activé quand data-theme="light" est présent sur <html>)
+:root[data-theme='light'] {
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-primary: #667eea; // bleu primaire
+  --color-accent: #764ba2;  // violet accent (dégradé)
+  --color-muted: #999999;
+  --color-border: #e0e0e0;
+  --icon-filter: none;
+}
+
+// Thème sombre (activé quand data-theme="dark" est présent sur <html>)
+:root[data-theme='dark'] {
+  --color-bg: #121212;
+  --color-text: #f8f8f8;
+  --color-primary: #8a9bff; // variante lisible en sombre
+  --color-accent: #a68bd8;
+  --color-muted: #cccccc;
+  --color-border: #333333;
+  --icon-filter: invert(1) brightness(1.25);
+}

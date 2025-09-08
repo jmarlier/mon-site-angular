@@ -1,1 +1,31 @@
-<p>portfolio works!</p>
+<section class="projects">
+  <div class="container">
+    <div class="header">
+      <h2>Projets récents</h2>
+      <p>Quelques exemples de créations et d’outils sur mesure réalisés récemment.</p>
+    </div>
+
+    <div class="grid">
+      @for (p of projects; track p.title) {
+        <article class="card">
+          @if (p.image) {
+            <div class="thumb">
+              <img [src]="p.image" [alt]="p.title" loading="lazy" />
+            </div>
+          }
+          <div class="content">
+            <h3>{{ p.title }}</h3>
+            <p class="desc">{{ p.description }}</p>
+            <ul class="tags">
+              @for (t of p.tech; track t) {
+                <li>{{ t }}</li>
+              }
+            </ul>
+          </div>
+        </article>
+      } @empty {
+        <p>Aucun projet pour le moment.</p>
+      }
+    </div>
+  </div>
+</section>

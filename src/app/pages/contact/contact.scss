@@ -1,0 +1,120 @@
+@use '../../../styles/variables' as *;
+
+.contact-section {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    animation: fadeIn 0.5s ease-out;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        color: var(--color-text);
+        font-weight: 600;
+    }
+
+    .intro {
+        text-align: center;
+        margin-top: -0.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--color-muted);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            caret-color: var(--color-text);
+            transition: border-color 0.3s, box-shadow 0.3s;
+
+            &:focus {
+                border-color: var(--color-primary);
+                box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.25);
+                outline: none;
+            }
+
+            &::placeholder {
+                color: var(--color-muted);
+                opacity: 1;
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            background-color: var(--color-primary);
+            color: var(--color-bg);
+            padding: 0.9rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+
+            &:hover {
+                background-color: #5569d6; // conserver l'état hover spécifique proche de l'accent
+                transform: translateY(-1px);
+            }
+
+            &:disabled {
+                background-color: #aaa; // état désactivé neutre
+                cursor: not-allowed;
+                transform: none;
+            }
+        }
+    }
+
+    p {
+        margin-top: 1rem;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1rem;
+
+        &.success {
+            color: $color-success;
+        }
+
+        &.error {
+            color: $color-danger;
+        }
+    }
+
+    // Petit effet d’apparition
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

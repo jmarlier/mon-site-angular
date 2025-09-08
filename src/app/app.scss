@@ -1,0 +1,42 @@
+// src/app/app.scss
+
+// Variables & styles globaux
+// Assure que les custom properties (:root, .dark-mode, [data-theme]) sont bien injectées globalement
+@use '../styles/variables' as *;
+@use '../styles/base';
+@use '../styles/layout';
+@use '../styles/buttons';
+
+// Composants globaux
+@use './components/header/header';
+@use './components/footer/footer';
+
+// Pages
+@use './pages/home/home';
+@use './pages/about/about';
+@use './pages/contact/contact';
+@use './pages/portfolio/portfolio';
+@use './pages/skills/skills';
+@use './pages/legal/legal';
+
+// Sticky footer layout using CSS Grid
+:host {
+  display: grid;
+  grid-template-rows: auto 1fr auto; // header, main, footer
+  min-height: 100dvh; // handle mobile dynamic viewport height
+}
+
+main {
+  min-height: 0; // allow content to shrink within grid
+}
+
+// Sticky wrapper to keep the header right under the surbar consistently
+.header-sticky {
+  position: sticky;
+  top: calc(var(--surbar-height, 40px) + var(--surbar-border, 1px));
+  z-index: 1000;
+  background: var(--color-bg);
+}
+
+// Optional spacer to avoid layout shift if header changes size
+.header-sticky .header-spacer { height: 0; }

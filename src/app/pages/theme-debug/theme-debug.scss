@@ -1,0 +1,42 @@
+.debug-root {
+  /* Variables locales (indépendantes des variables globales du site) */
+  --dbg-bg: #ffffff;
+  --dbg-text: #1a1a1a;
+  --dbg-border: #cccccc;
+
+  &[data-theme='dark'] {
+    --dbg-bg: #121212;
+    --dbg-text: #f1f1f1;
+    --dbg-border: #444444;
+  }
+
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+  background: var(--dbg-bg);
+  color: var(--dbg-text);
+}
+
+.debug-container {
+  width: min(900px, 100%);
+}
+
+.panel {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--dbg-border);
+  background: var(--dbg-bg);
+  color: var(--dbg-text);
+}
+
+.dbg-btn {
+  background: transparent;
+  border: 1px solid var(--dbg-border);
+  color: var(--dbg-text);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+

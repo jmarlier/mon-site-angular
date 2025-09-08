@@ -1,0 +1,187 @@
+// === HEADER MODERNISÉ (stretch conservé) ===
+
+.main-header {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 2rem;
+    transition: padding 0.2s ease;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: auto;
+        position: relative;
+    }
+
+    .logo {
+        font-family: 'Courier New', monospace;
+        font-size: 2.5rem;
+        color: #0ff;
+        text-shadow:
+            0 0 5px #0ff,
+            0 0 10px #0ff,
+            0 0 20px #0ff,
+            0 0 40px #0ff;
+        animation: flicker 1.5s infinite alternate;
+        transition: font-size 0.2s ease, text-shadow 0.2s ease;
+
+        @keyframes flicker {
+            0% {
+                opacity: 1;
+                text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+            }
+
+            50% {
+                opacity: 0.9;
+                text-shadow: 0 0 10px #0ff, 0 0 30px #0ff, 0 0 50px #0ff;
+            }
+
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 25px #0ff;
+            }
+        }
+    }
+
+    .menu-icon {
+        font-size: 2rem;
+        cursor: pointer;
+        display: none;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .nav-menu {
+        position: relative;
+        display: flex;
+        gap: 2rem;
+        outline: none;
+        align-items: flex-end; // aligne la barre sous les liens
+        padding-bottom: 4px; // laisse de la place à la barre
+
+        a {
+            position: relative;
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+            &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+            &.active {
+                color: var(--color-primary);
+            }
+
+            &:hover {
+                color: var(--color-text);
+            }
+        }
+
+        .underline {
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: all 0.4s ease;
+            transform-origin: left;
+            pointer-events: none;
+            left: 0;
+            width: 0;
+            z-index: 1;
+        }
+
+
+    }
+
+    // underline uses theme primary color; no debug styles
+}
+
+.main-header.shrink {
+    padding: 0.5rem 1.25rem;
+
+    .logo {
+        font-size: 1.5rem;
+        text-shadow:
+            0 0 4px #0ff,
+            0 0 8px #0ff,
+            0 0 12px #0ff;
+    }
+
+    // Keep gap stable to avoid layout shift
+    .nav-menu { gap: 2rem; }
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    // Mobile: menu masqué par défaut, visible au toggle
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-top: 1rem;
+
+        a {
+            font-size: 1.1rem;
+            color: var(--color-text);
+            padding-bottom: 5px;
+            &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+            &.active {
+                color: var(--color-primary);
+            }
+
+            &:hover {
+                color: var(--color-text);
+            }
+        }
+
+        .underline {
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-origin: center;
+            left: 0;
+            width: 100px;
+            transform: translateX(0) scaleX(1);
+            pointer-events: none;
+        }
+    }
+
+    // Checkbox hack pour afficher le menu
+    .menu-toggle:checked ~ .nav-menu {
+        display: flex;
+    }
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+    img {
+        width: 24px;
+        height: 24px;
+        filter: var(--icon-filter, none);
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: rotate(20deg) scale(1.1);
+        }
+    }
+
+    // S'appuie uniquement sur la variable --icon-filter
+}
