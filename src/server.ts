@@ -4,14 +4,14 @@ import {
   isMainModule,
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { join } from 'node:path';
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
-// ➤ Servir les fichiers statiques
+// ➤ Fichiers statiques
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -19,8 +19,13 @@ app.use(
   }),
 );
 
-// ➤ Route Angular universelle
-app.use(async (req, res, next) => {
+// ➤ Route de santé
+app.get('/health', (_req: Request, res: Response) => {
+  res.json({ status: 'ok', env: process.env['NODE_ENV'] || 'dev' });
+});
+
+// ➤ Routes Angular SSR
+app.use(async (req: Request, res: Response, next: NextFunction) => {
   try {
     const response = await angularApp.handle(req);
     if (response) {
@@ -35,21 +40,21 @@ app.use(async (req, res, next) => {
 });
 
 // ➤ Fallback 404
-app.use((_, res) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).send('Not Found');
 });
 
-// ➤ Lancement du serveur uniquement en mode standalone (local)
+// ➤ Lancement standalone (local/dev)
 if (isMainModule(import.meta.url)) {
   const port = process.env['PORT'] ? Number(process.env['PORT']) : 4000;
   const host = '0.0.0.0';
+
   app.listen(port, host, () => {
-    console.log(`✅ Angular SSR server running at http://${host}:${port}`);
+    console.log(`✅ Angular SSR server listening on http://${host}:${port}`);
+    console.log('>>> NODE_ENV:', process.env['NODE_ENV']);
+    console.log('>>> PORT (Passenger):', process.env['PORT']);
   });
 }
 
-// ➤ Exporter pour Passenger
-export default app;
-
-// ➤ Export handler (utile pour tests/Firebase)
+// ➤ Export handler pour Passenger
 export const reqHandler = createNodeRequestHandler(app);
