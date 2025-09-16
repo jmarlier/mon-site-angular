@@ -33,7 +33,8 @@ main {
 // Sticky wrapper to keep the header right under the surbar consistently
 .header-sticky {
   position: sticky;
-  top: calc(var(--surbar-height, 40px) + var(--surbar-border, 1px));
+  // Décale le header uniquement si la surbar est activée
+  top: calc(var(--surbar-on, 1) * (var(--surbar-height, 40px) + var(--surbar-border, 1px)));
   z-index: 1000;
   background: var(--color-bg);
 }

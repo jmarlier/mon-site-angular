@@ -28,6 +28,55 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 /**
+ * Maintenance mode (enable via env MAINTENANCE=1 or MAINTENANCE=true)
+ * Optional preview bypass token via MAINTENANCE_BYPASS_TOKEN
+ */
+const maintenanceEnabled = String(process.env['MAINTENANCE'] || '').toLowerCase() === 'true' || process.env['MAINTENANCE'] === '1';
+const maintenanceBypassToken = process.env['MAINTENANCE_BYPASS_TOKEN'] || '';
+
+function hasBypassCookie(req: express.Request): boolean {
+  const cookie = req.headers['cookie'] || '';
+  return cookie.includes('maint_bypass=1');
+}
+
+app.use((req, res, next) => {
+  if (!maintenanceEnabled) return next();
+
+  // Allow preview bypass with query token or existing cookie
+  if (maintenanceBypassToken) {
+    if (req.query['preview'] === maintenanceBypassToken) {
+      res.setHeader('Set-Cookie', 'maint_bypass=1; Path=/; Max-Age=1800; SameSite=Lax'); // 30 min
+      return res.redirect(302, req.path);
+    }
+    if (hasBypassCookie(req)) return next();
+  }
+
+  // Allow essential static assets (favicon, images, icons, css) to be served
+  const p = req.path || '';
+  if (
+    p === '/favicon.ico' ||
+    p.startsWith('/img/') ||
+    p.startsWith('/icons/') ||
+    p.endsWith('.css') ||
+    p.endsWith('.js') ||
+    p.endsWith('.map') ||
+    p === '/robots.txt' ||
+    p === '/sitemap.xml'
+  ) {
+    return next();
+  }
+
+  // Serve a static maintenance page with 503
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  res.setHeader('Retry-After', '3600');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  res.status(503);
+  return res.sendFile(join(browserDistFolder, 'maintenance.html'));
+});
+
+/**
  * Example Express Rest API endpoints can be defined here.
  * Uncomment and define endpoints as necessary.
  *

@@ -1,20 +1,29 @@
 <header class="main-header" [class.shrink]="isShrunk">
     <div class="container">
         <div class="logo">
-            <a routerLink="/">
-                @if (isShrunk) {
-                &lt;/&gt;
-                } @else {
-                &lt;Jérôme MARLIER&gt;&lt;/&gt;
-                }
+            <a routerLink="/" aria-label="Accueil — Jérôme Marlier">
+                <img src="/img/logo-monogram.svg" width="40" height="40" alt="Logo monogramme JM" />
+                <span class="wordmark" aria-hidden="true">
+                    @if (isShrunk) {
+                        &lt;/&gt;
+                    } @else {
+                        &lt;Jérôme MARLIER&gt;&lt;/&gt;
+                    }
+                </span>
             </a>
         </div>
 
         <input type="checkbox" id="menu-toggle" class="menu-toggle" #menuToggle />
-        <label for="menu-toggle" class="menu-icon" aria-label="Ouvrir le menu"
-            [attr.aria-expanded]="menuToggle?.checked" aria-controls="main-nav">&#9776;</label>
+        <label for="menu-toggle" class="menu-icon" aria-label="Ouvrir le menu" role="button" tabindex="0"
+            [attr.aria-expanded]="menuToggle?.checked" aria-controls="main-nav">
+            <span class="burger" aria-hidden="true">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </span>
+        </label>
 
-        <nav class="nav-menu" id="main-nav" aria-label="Navigation principale">
+        <nav class="nav-menu" id="main-nav" aria-label="Navigation principale" [class.open]="menuToggle?.checked">
             <a routerLink="/" routerLinkActive="active" #rlaHome="routerLinkActive"
                 [routerLinkActiveOptions]="{ exact: true }"
                 [attr.aria-current]="rlaHome.isActive ? 'page' : null">Accueil</a>

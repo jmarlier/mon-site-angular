@@ -13,6 +13,12 @@ export class Header implements AfterViewInit, OnDestroy {
   isDarkMode = false;
   private cleanup: Array<() => void> = [];
   isShrunk = false;
+  private scrollRafScheduled = false;
+  // Hysteresis + guard interval to avoid flicker near the threshold
+  private readonly shrinkEnterThreshold = 120; // px to enter shrink state
+  private readonly shrinkLeaveThreshold = 40;  // px to leave shrink state
+  private readonly shrinkMinIntervalMs = 250;  // min delay between state flips
+  private lastShrinkToggleAt = 0;
 
   constructor(
     private router: Router,
@@ -131,12 +137,30 @@ export class Header implements AfterViewInit, OnDestroy {
   @HostListener('window:scroll')
   onWindowScroll(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    this.updateShrinkState();
+    if (this.scrollRafScheduled) return;
+    this.scrollRafScheduled = true;
+    requestAnimationFrame(() => {
+      this.updateShrinkState();
+      this.scrollRafScheduled = false;
+    });
   }
 
   private updateShrinkState() {
     const y = window.scrollY || document.documentElement.scrollTop || 0;
-    this.isShrunk = y > 20;
+    const now = performance.now ? performance.now() : Date.now();
+
+    // Determine desired state with hysteresis
+    let desired = this.isShrunk;
+    if (!this.isShrunk && y >= this.shrinkEnterThreshold) desired = true;
+    if (this.isShrunk && y <= this.shrinkLeaveThreshold) desired = false;
+
+    // Apply only if changed and outside guard interval to prevent rapid toggles
+    if (desired !== this.isShrunk) {
+      if (now - this.lastShrinkToggleAt >= this.shrinkMinIntervalMs) {
+        this.isShrunk = desired;
+        this.lastShrinkToggleAt = now;
+      }
+    }
   }
 
   ngOnDestroy(): void {

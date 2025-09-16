@@ -56,8 +56,8 @@
   .scroll-top {
     position: fixed;
     bottom: 2rem;
-    right: 2rem;
-    background: var(--color-text);
+    right: 5rem;
+    background: var(--color-accent);
     color: var(--color-bg);
     border: none;
     border-radius: 50%;
@@ -72,6 +72,7 @@
 
     &:hover {
       transform: scale(1);
+      box-shadow: var(--shadow-medium);
     }
   }
 
@@ -84,4 +85,62 @@
   }
 }
 
-// Bordure s'adapte via var(--color-border)
+.footer-fixed {
+  position: fixed;
+  bottom: 1rem; 
+  color: var(--color-text);
+  font-size: 0.9rem;
+  z-index: 95;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+
+  img {
+    width: 26px;
+    height: 26px;
+    filter: var(--icon-filter);
+    transition: transform 0.3s ease;
+    &:hover { transform: scale(1.2); }
+  }
+}
+
+.footer-left {
+  left: 1rem;
+}
+
+.footer-right {
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  
+    .follow-text {
+      writing-mode: vertical-rl;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      opacity: 0.7;
+      white-space: nowrap; // évite le retour à la ligne sur mobile
+    }
+        /* La ligne entre le texte et les logos */
+    .separator {
+      width: 1px;                                  /* ligne verticale */
+      height: var(--social-sep-height, 48px);      /* ajustable */
+      background: var(--color-muted);
+      opacity: 0.5;
+      pointer-events: none;                        /* n’intercepte pas les clics */
+    }
+
+}
+
+/* Responsive : cacher le texte + la ligne sur mobile */
+@media (max-width: 768px) {
+  .footer-right .follow-text,
+  .footer-right .separator {
+    display: none;
+  }
+}

@@ -57,7 +57,8 @@ a {
     transition: color 0.3s ease;
 
     &:hover {
-    color: color.adjust($color-secondary, $lightness: 10%);
+      /* Hover dépendant du thème via variables CSS */
+      color: color-mix(in oklab, var(--color-accent), white 12%);
     }
 }
 
@@ -66,3 +67,12 @@ footer {
     background-color: var(--color-bg);
     color: var(--color-text);
 }
+
+/* Code font per theme */
+code, pre, kbd, samp {
+  font-family: $font-code-light;
+}
+html[data-theme='dark'] code,
+html[data-theme='dark'] pre,
+html[data-theme='dark'] kbd,
+html[data-theme='dark'] samp { font-family: $font-code-dark; }

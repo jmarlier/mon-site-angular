@@ -6,32 +6,46 @@
   <title>Jérôme Marlier — Développeur Web Freelance</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3B82F6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0A0A0B" media="(prefers-color-scheme: dark)">
   <meta name="description"
-    content="Développeur web freelance — sites vitrines, back‑offices et applications web performantes. Basé en Auvergne‑Rhône‑Alpes." />
+    content="Développeur web freelance — sites vitrines, back-offices et applications web performantes. Basé en Auvergne-Rhône-Alpes." />
   <link rel="canonical" href="https://jeromemarlier.com/" />
+
+  <!-- Open Graph / Réseaux sociaux -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Jérôme Marlier" />
-  <meta name="twitter:card" content="summary" />
-  <!-- Basic CSP; prefer setting via HTTP headers in production. Adjust as needed. -->
+  <meta property="og:url" content="https://jeromemarlier.com/" />
+  <meta property="og:title" content="Développeur Web Freelance — Jérôme Marlier" />
+  <meta property="og:description"
+    content="Sites vitrines, applications web et solutions sur mesure. Basé en Auvergne-Rhône-Alpes." />
+  <meta property="og:image" content="/img/og-cover.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Jérôme Marlier — Développeur Web Freelance" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Développeur Web Freelance — Jérôme Marlier" />
+  <meta name="twitter:description" content="Sites vitrines, applications web et solutions sur mesure." />
+  <meta name="twitter:image" content="/img/og-cover.svg" />
+
+  <!-- Basic CSP; en production, mieux via HTTP headers -->
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self';" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Jérôme Marlier",
-    "jobTitle": "Développeur web freelance",
-    "url": "https://jeromemarlier.com/",
-    "sameAs": [
-      "https://github.com/jmarlier",
-      "https://www.linkedin.com/in/jeromemarlier"
-    ]
-  }
-  </script>
+
+  <!-- JSON-LD LocalBusiness + Person (chargé via fichier pour respecter la CSP) -->
+  <script type="application/ld+json" src="/schema.json"></script>
 </head>
 
 <body>

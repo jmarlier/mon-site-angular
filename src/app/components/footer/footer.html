@@ -1,7 +1,28 @@
+<!-- Blocs fixes -->
+<div class="footer-fixed footer-left">
+    <p>E: info@jeromemarlier.com</p>
+    <p>T: 06 51 78 45 84</p>
+</div>
+
+<div class="footer-fixed footer-right">
+    <p class="follow-text">Suivez-moi</p>
+    <span class="separator" aria-hidden="true"></span>
+    <a href="https://github.com/jmarlier" target="_blank" aria-label="GitHub">
+        <img src="/icons/github.svg" alt="GitHub" />
+    </a>
+    <a href="https://www.linkedin.com/in/jeromemarlier" target="_blank" aria-label="LinkedIn">
+        <img src="/icons/linkedin.svg" alt="LinkedIn" />
+    </a>
+</div>
+
+<!-- Footer existant -->
 <footer class="main-footer" [class.visible]="footerVisible">
     <div class="container" #footerObserver>
-        <p class="footer-meta">© 2025 Jérôme Marlier - Tous droits réservés. - <a routerLink="/legal">Mentions
-                légales</a> - <a routerLink="/contact">Contact</a></p>
+        <p class="footer-meta">
+            © 2025 Jérôme Marlier - Tous droits réservés. -
+            <a routerLink="/legal">Mentions légales</a> -
+            <a routerLink="/contact">Contact</a>
+        </p>
 
         <div class="social-links">
             <a href="https://github.com/jmarlier" target="_blank" rel="noopener" aria-label="GitHub">
@@ -11,9 +32,10 @@
                 <img src="/icons/linkedin.svg" alt="LinkedIn" />
             </a>
         </div>
-
-        <button *ngIf="showScrollTop" class="scroll-top" aria-label="Revenir en haut" (click)="scrollToTop()">
-            ⬆
-        </button>
     </div>
+
+    <!-- Bouton retour en haut -->
+    <button *ngIf="showScrollTop" class="scroll-top" type="button" aria-label="Revenir en haut" (click)="scrollToTop()">
+        ↑
+    </button>
 </footer>

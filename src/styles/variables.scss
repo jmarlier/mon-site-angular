@@ -3,7 +3,9 @@
 // ==========================
 
 // === Polices
-$font-main: 'DM Sans', sans-serif;
+$font-main: 'Inter', sans-serif;
+$font-code-light: 'JetBrains Mono', monospace; // code (thème clair)
+$font-code-dark: 'Fira Code', monospace;       // code (thème sombre)
 $font-size-base: 16px;
 $line-height-base: 1.6;
 
@@ -21,10 +23,11 @@ $spacing-lg: 3rem;
 $spacing-xl: 4rem;
 $spacing-unit: 1rem;
 
-// === Couleurs SCSS (non dynamiques)
-$color-secondary: #667eea; // aligné avec la charte
-$color-danger: #e63946;
-$color-success: #38b000;
+// === Couleurs utilitaires SCSS (non dynamiques)
+// Les variantes par thème sont gérées via les custom properties CSS plus bas
+$color-secondary: #1D4ED8; // Light secondary (dark via var)
+$color-danger: #EF4444;
+$color-success: #10B981;
 
 // === Custom properties CSS dynamiques (mode clair/sombre)
 // Variables non liées au thème (toujours disponibles)
@@ -33,24 +36,68 @@ $color-success: #38b000;
   --surbar-border: 1px;  // épaisseur de la bordure de la surbar
 }
 
-// Thème clair (activé quand data-theme="light" est présent sur <html>)
+// Thème clair — Tech Moderne
 :root[data-theme='light'] {
   --color-bg: #ffffff;
-  --color-text: #1a1a1a;
-  --color-primary: #667eea; // bleu primaire
-  --color-accent: #764ba2;  // violet accent (dégradé)
-  --color-muted: #999999;
-  --color-border: #e0e0e0;
+  --color-text: #0F172A;
+  --color-primary: #3B82F6;
+  --color-accent: #10B981;
+  --color-muted: #64748B;
+  --color-border: #E2E8F0;
+  --color-bg-alt: #F8FAFC;
   --icon-filter: none;
+
+  --color-secondary: #1D4ED8;
+  --radius-base: 8px;
+  --shadow-subtle: 0 4px 10px rgba(59,130,246,0.08);
+  --shadow-medium: 0 8px 20px rgba(59,130,246,0.12);
+  --shadow-glow: 0 0 0 rgba(0,0,0,0);
+
+  /* Boutons */
+  --btn-primary-bg: linear-gradient(90deg, #3B82F6, #1D4ED8);
+  --btn-primary-color: #ffffff;
+  --btn-primary-border: transparent;
+  --btn-primary-hover-bg: linear-gradient(90deg, #1D4ED8, #1E40AF);
+  --btn-primary-hover-shadow: 0 8px 20px rgba(59,130,246,0.25);
+
+  --btn-secondary-border: var(--color-accent);
+  --btn-secondary-color: var(--color-accent);
+  --btn-secondary-hover-bg: var(--color-accent);
+  --btn-secondary-hover-color: #ffffff;
+
+  /* Surbar */
+  --surbar-gradient: linear-gradient(90deg, color-mix(in oklab, var(--color-primary) 16%, var(--color-bg)), var(--color-bg));
 }
 
-// Thème sombre (activé quand data-theme="dark" est présent sur <html>)
+// Thème sombre — Dark Professional
 :root[data-theme='dark'] {
-  --color-bg: #121212;
-  --color-text: #f8f8f8;
-  --color-primary: #8a9bff; // variante lisible en sombre
-  --color-accent: #a68bd8;
-  --color-muted: #cccccc;
+  --color-bg: #0A0A0B;
+  --color-text: #FFFFFF;
+  --color-primary: #FBBF24;
+  --color-accent: #8B5CF6;
+  --color-muted: #A1A1AA;
   --color-border: #333333;
+  --color-bg-alt: #1A1A1B;
   --icon-filter: invert(1) brightness(1.25);
+
+  --color-secondary: #F59E0B;
+  --radius-base: 8px;
+  --shadow-subtle: 0 2px 6px rgba(0,0,0,0.25);
+  --shadow-medium: 0 6px 18px rgba(0,0,0,0.35);
+  --shadow-glow: 0 0 16px rgba(251,191,36,0.5);
+
+  /* Boutons */
+  --btn-primary-bg: transparent;
+  --btn-primary-color: #FBBF24;
+  --btn-primary-border: #FBBF24;
+  --btn-primary-hover-bg: #FBBF24;
+  --btn-primary-hover-shadow: 0 0 24px rgba(251,191,36,0.45);
+
+  --btn-secondary-border: var(--color-accent);
+  --btn-secondary-color: var(--color-accent);
+  --btn-secondary-hover-bg: var(--color-accent);
+  --btn-secondary-hover-color: #0A0A0B;
+
+  /* Surbar */
+  --surbar-gradient: linear-gradient(90deg, color-mix(in oklab, #FBBF24 18%, var(--color-bg)), var(--color-bg));
 }

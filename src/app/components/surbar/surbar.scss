@@ -5,7 +5,7 @@
   width: 100%;
   z-index: 1100;
   height: var(--surbar-height);
-  background: linear-gradient(90deg, color-mix(in oklab, var(--color-primary) 16%, var(--color-bg)), var(--color-bg));
+  background: var(--surbar-gradient);
   border-bottom: var(--surbar-border) solid var(--color-border);
   color: var(--color-text);
   display: flex;

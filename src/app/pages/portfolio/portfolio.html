@@ -1,31 +1,118 @@
 <section class="projects">
   <div class="container">
     <div class="header">
-      <h2>Projets récents</h2>
-      <p>Quelques exemples de créations et d’outils sur mesure réalisés récemment.</p>
+      <h2>Prestations & services</h2>
+      <p>Des solutions web modernes, fiables et conçues pour répondre à vos besoins réels.</p>
     </div>
 
     <div class="grid">
-      @for (p of projects; track p.title) {
-        <article class="card">
-          @if (p.image) {
-            <div class="thumb">
-              <img [src]="p.image" [alt]="p.title" loading="lazy" />
-            </div>
-          }
-          <div class="content">
-            <h3>{{ p.title }}</h3>
-            <p class="desc">{{ p.description }}</p>
-            <ul class="tags">
-              @for (t of p.tech; track t) {
-                <li>{{ t }}</li>
-              }
-            </ul>
-          </div>
-        </article>
-      } @empty {
-        <p>Aucun projet pour le moment.</p>
-      }
+      <article class="card">
+        <div class="thumb">
+          <img src="/img/prestation-site-vitrine.jpg" alt="Création de site vitrine" loading="lazy" />
+        </div>
+        <div class="content">
+          <h3>Site vitrine</h3>
+          <p class="desc">
+            Un site clair, moderne et responsive pour présenter votre activité et vous démarquer en ligne.
+          </p>
+          <ul class="tags">
+            <li>Design personnalisé</li>
+            <li>Responsive</li>
+            <li>SEO</li>
+            <li>Performance</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb">
+          <img src="/img/prestation-app-metier.jpg" alt="Application métier" loading="lazy" />
+        </div>
+        <div class="content">
+          <h3>Application métier</h3>
+          <p class="desc">
+            Des outils sur mesure pour digitaliser vos processus internes, automatiser vos tâches et gagner en efficacité.
+          </p>
+          <ul class="tags">
+            <li>Back-office</li>
+            <li>API</li>
+            <li>PDF</li>
+            <li>Admin sécurisé</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb">
+          <img src="/img/prestation-espace-client.jpg" alt="Espace client" loading="lazy" />
+        </div>
+        <div class="content">
+          <h3>Espace client</h3>
+          <p class="desc">
+            Proposez à vos clients un accès personnalisé à leurs données, documents ou commandes.
+          </p>
+          <ul class="tags">
+            <li>Connexion sécurisée</li>
+            <li>Interface intuitive</li>
+            <li>Rôles & permissions</li>
+            <li>Upload / téléchargement</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb">
+          <img src="/img/prestation-integration-api.jpg" alt="Connexion API" loading="lazy" />
+        </div>
+        <div class="content">
+          <h3>Connexion à des API</h3>
+          <p class="desc">
+            Paiement, CRM, emailing, OpenData… Je peux connecter votre site à vos outils ou bases existantes.
+          </p>
+          <ul class="tags">
+            <li>Stripe / PayPal</li>
+            <li>VIES / Sirene</li>
+            <li>REST API</li>
+            <li>Automatisation</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb">
+          <img src="/img/prestation-pdf.jpg" alt="PDF automatisés" loading="lazy" />
+        </div>
+        <div class="content">
+          <h3>Documents PDF</h3>
+          <p class="desc">
+            Devis, factures, bons de livraison : vos documents générés automatiquement en PDF depuis votre back-office.
+          </p>
+          <ul class="tags">
+            <li>Dompdf / Browsershot</li>
+            <li>Signature électronique</li>
+            <li>Templates personnalisés</li>
+            <li>Multi-pages</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb">
+          <img src="/img/prestation-maintenance.jpg" alt="Maintenance évolutive" loading="lazy" />
+        </div>
+        <div class="content">
+          <h3>Maintenance & évolutions</h3>
+          <p class="desc">
+            Je vous accompagne sur la durée : corrections, évolutions, refontes progressives, conseils techniques.
+          </p>
+          <ul class="tags">
+            <li>Correctifs</li>
+            <li>Évolutions</li>
+            <li>Conseils</li>
+            <li>Accompagnement</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </div>
 </section>

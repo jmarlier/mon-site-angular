@@ -1,25 +1,164 @@
-<section class="hero">
-  <div class="hero-content">
-    <p class="kicker">Développeur Web Freelance — Full‑Stack</p>
-    <h1>
-      Bonjour, je suis <span class="gradient-text">Jérôme Marlier</span>.
-      <br />
-      Je conçois des produits web élégants et performants.
-    </h1>
+<!-- JSON-LD FAQ (attention: bloqué par la CSP actuelle sans 'unsafe-inline' ou hash/nonce) -->
+<script type="application/ld+json">
+  {{ schemaJsonLd }}
+</script>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">
+        Développeur Web Freelance
+        <span class="highlight">Full-Stack</span>
+      </h1>
 
-    <p class="subtitle">
-      Sites vitrines, applications métier, back‑offices et outils internes. J’apporte une approche pragmatique, design soigné et qualité technique.
-    </p>
+      <div class="hero-content">
+        <!-- Bloc texte -->
+        <div class="hero-text">
+          <h2 class="hero-question">
+            Besoin d’un site internet performant ou d’un outil sur mesure&nbsp;?
+          </h2>
 
-    <div class="cta-buttons">
-      <a routerLink="/portfolio" class="btn btn-primary">Voir mes réalisations</a>
-      <a routerLink="/contact" class="btn btn-secondary">Discutons de votre projet</a>
+          <p class="subtitle">
+            J’accompagne <strong>entreprises</strong> et <strong>indépendants</strong> dans leurs projets web.  
+            Votre présence en ligne doit être efficace, claire et alignée avec vos objectifs.  
+            J’apporte une <strong>expertise technique solide</strong> pour concevoir des solutions 
+            <strong>fiables, évolutives et optimisées SEO</strong>.
+          </p>
+
+          <p class="hero-description">
+            J’interviens à chaque étape d’un projet&nbsp;:  
+            <strong>conception technique</strong>, <strong>développement</strong>, 
+            <strong>intégration d’outils</strong>, <strong>optimisation SEO</strong> et <strong>maintenance</strong>.  
+            Mon approche est <strong>pragmatique</strong>, orientée résultats et pensée pour durer.
+          </p>
+
+          <div class="cta-buttons">
+            <a routerLink="/portfolio" class="btn btn-primary">Voir mes prestations</a>
+            <a routerLink="/contact" class="btn btn-secondary">Me contacter</a>
+          </div>
+        </div>
+
+        <!-- Bloc image -->
+        <div class="hero-visual">
+          <img src="/img/hero-illustration.jpg" alt="Illustration développement web" loading="lazy" />
+        </div>
+      </div>
     </div>
+  </section>
 
+  <section class="home-section alt-bg">
+    <div class="container">
+      <h2>Vous avez un projet digital&nbsp;?</h2>
+      <p class="lead">
+        Je vous accompagne à chaque étape, de l’idée au produit final.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Création de site vitrine</h3>
+          <p>Pour présenter votre activité de manière professionnelle, accessible et moderne.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Application métier</h3>
+          <p>Des outils sur mesure pour automatiser, organiser ou améliorer vos processus internes.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Développement sur mesure</h3>
+          <p>Connexion à vos outils, espace client, génération de PDF, tableaux de bord, etc.</p>
+        </div>
+      </div>
+
+      <div class="cta-centered">
+        <a routerLink="/portfolio" class="btn btn-primary">Voir toutes mes prestations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <h2>Pourquoi travailler avec moi&nbsp;?</h2>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Un parcours professionnel solide</h3>
+          <p>15 ans de management, une reconversion réussie, une approche orientée client et résultat.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Un vrai partenaire technique</h3>
+          <p>Je ne me contente pas d'exécuter. Je challenge, propose et guide vers les meilleures solutions.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Une communication claire</h3>
+          <p>Vous êtes informé à chaque étape. Transparence, rigueur et accessibilité technique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section alt-bg">
+    <div class="container">
+      <h2>Mes derniers projets</h2>
+      <p class="lead">Découvrez quelques réalisations récentes</p>
+
+      <div class="projects-mini">
+        <div class="project-card">
+          <img src="/images/project-canopee.jpg" alt="Développement d'une application de gestion pour l'agence Canopée" loading="lazy" />
+          <h3>Agence Canopée</h3>
+          <p>Gestion de devis, signature électronique, PDF, facturation.</p>
+        </div>
+        <div class="project-card">
+          <img src="/images/project-alphadis.jpg" alt="Plateforme logistique Alphadis développée sur mesure" loading="lazy" />
+          <h3>Alphadis</h3>
+          <p>Plateforme logistique : ordres de transport, dépôt de documents, signatures.</p>
+        </div>
+      </div>
+
+      <div class="cta-centered">
+        <a routerLink="/portfolio" class="btn btn-secondary">Voir tout le portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section faq-section">
+    <div class="container">
+      <h2>FAQ – Questions fréquentes</h2>
+      <div class="faq-grid">
+        <!-- Questions déjà listées -->
+        <div class="faq-item">
+          <h3>Combien coûte la création d’un site internet ?</h3>
+          <p>Le prix dépend de la complexité du projet (site vitrine, application métier, développement sur mesure). Pour un site vitrine professionnel, il faut généralement compter entre X et Y €.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Quel est le délai pour développer un site web ?</h3>
+          <p>Un site vitrine peut être en ligne en 3 à 5 semaines. Pour une application métier ou un outil sur mesure, le délai varie de quelques semaines à plusieurs mois.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Quelle est la différence entre travailler avec un freelance et une agence web ?</h3>
+          <p>Avec un freelance, vous bénéficiez d’un interlocuteur unique, d’une plus grande réactivité et souvent d’un tarif plus compétitif.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Proposez-vous la maintenance après la mise en ligne ?</h3>
+          <p>Oui, je propose un suivi technique, des mises à jour régulières et un support pour assurer la stabilité et la sécurité de votre site.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Mon site sera-t-il optimisé pour le référencement (SEO) ?</h3>
+          <p>Oui, j’intègre les bonnes pratiques SEO dès la conception : structure claire, balises optimisées, performances techniques et compatibilité mobile.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Travaillez-vous uniquement en Auvergne-Rhône-Alpes ?</h3>
+          <p>Je suis basé en Auvergne-Rhône-Alpes, mais j’accompagne des clients dans toute la France grâce aux outils de communication à distance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section contact-cta">
+    <div class="container">
+      <h2>Discutons de votre projet</h2>
+      <p class="lead">Je suis à votre écoute pour vous proposer un accompagnement adapté.</p>
+      <a href="/contact" class="btn btn-primary">Me contacter</a>
+    </div>
     <div class="hero-meta">
-      <span>Basé en Auvergne‑Rhône‑Alpes</span>
+      <span>Basé en Auvergne-Rhône-Alpes</span>
       <span class="sep">•</span>
       <span>Disponible pour missions freelance</span>
     </div>
-  </div>
-</section>
+  </section>
