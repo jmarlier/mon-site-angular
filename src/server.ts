@@ -39,17 +39,6 @@ app.use((_, res) => {
   res.status(404).send('Not Found');
 });
 
-// ➤ Lancement du serveur uniquement si exécuté directement
-if (isMainModule(import.meta.url)) {
-    const port = Number(process.env['PORT'] || 4000);
-    const host = '0.0.0.0';
-
-    app.listen(port, host, () => {
-      console.log(`✅ Angular SSR server running at http://${host}:${port}`);
-      console.log(">>> NODE_ENV:", process.env['NODE_ENV']);
-      console.log(">>> PORT reçu de Passenger:", process.env['PORT']);
-    });
-}
 
 // ➤ Export handler (utile pour Firebase ou tests)
 export const reqHandler = createNodeRequestHandler(app);
