@@ -39,6 +39,17 @@ app.use((_, res) => {
   res.status(404).send('Not Found');
 });
 
+// ➤ Lancement du serveur uniquement en mode standalone (local)
+if (isMainModule(import.meta.url)) {
+  const port = process.env['PORT'] ? Number(process.env['PORT']) : 4000;
+  const host = '0.0.0.0';
+  app.listen(port, host, () => {
+    console.log(`✅ Angular SSR server running at http://${host}:${port}`);
+  });
+}
 
-// ➤ Export handler (utile pour Firebase ou tests)
+// ➤ Exporter pour Passenger
+export default app;
+
+// ➤ Export handler (utile pour tests/Firebase)
 export const reqHandler = createNodeRequestHandler(app);
