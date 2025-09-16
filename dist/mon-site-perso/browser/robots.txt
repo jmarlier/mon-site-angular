@@ -1,0 +1,9 @@
+# Update the domain below to your production site
+User-agent: *
+Allow: /
+
+# Disallow common non-content endpoints (none for this site)
+# Disallow: /api/
+
+Sitemap: https://www.example.com/sitemap.xml
+

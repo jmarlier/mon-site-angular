@@ -45,3 +45,6 @@ Thumbs.db
 # Environment files
 .env
 .env.local
+
+# Pour la prod
+!dist/
