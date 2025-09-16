@@ -46,6 +46,8 @@ if (isMainModule(import.meta.url)) {
 
     app.listen(port, host, () => {
       console.log(`✅ Angular SSR server running at http://${host}:${port}`);
+      console.log(">>> NODE_ENV:", process.env['NODE_ENV']);
+      console.log(">>> PORT reçu de Passenger:", process.env['PORT']);
     });
 }
 
