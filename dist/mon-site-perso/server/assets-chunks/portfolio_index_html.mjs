@@ -50,4 +50,4 @@ export default `<!DOCTYPE html><html lang="fr" data-theme="light" data-beasties-
 
 
 
-<script id="ng-state" type="application/json">{"__nghData__":[{"t":{"6":"t1","7":"t2"},"c":{"6":[],"7":[{"i":"t2","r":1}]}},{},{"t":{"28":"t5"},"c":{"28":[]}},{"t":{"0":"t0"},"c":{"0":[],"5":[{"i":"c2890762077","r":1}]}}]}</script></body></html>`;
+<script id="ng-state" type="application/json">{"__nghData__":[{"t":{"6":"t1","7":"t2"},"c":{"6":[],"7":[{"i":"t2","r":1}]}},{},{"t":{"28":"t3"},"c":{"28":[]}},{"t":{"0":"t0"},"c":{"0":[],"5":[{"i":"c2890762077","r":1}]}}]}</script></body></html>`;
