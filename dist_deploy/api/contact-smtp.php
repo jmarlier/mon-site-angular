@@ -2,11 +2,20 @@
 // Contact endpoint using PHPMailer over SMTP for better deliverability.
 // Requires Composer autoload (vendor/autoload.php) to be available on the server.
 
+header('Content-Type: application/json; charset=UTF-8');
+
+// Debug/trace helper (logs to api/mail-error.log)
+$LOG_FILE = __DIR__ . '/mail-error.log';
+$DEBUG = (isset($_GET['debug']) && $_GET['debug'] === '1') || strtolower((string)getenv('APP_ENV')) === 'dev';
+function log_err($msg) {
+  global $LOG_FILE;
+  @file_put_contents($LOG_FILE, '[' . date('c') . "] " . $msg . "\n", FILE_APPEND);
+}
+
 // Only accept POST
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
   http_response_code(405);
   header('Allow: POST');
-  header('Content-Type: application/json');
   echo json_encode(['error' => 'Method Not Allowed']);
   exit;
 }
@@ -22,9 +31,9 @@ foreach ($autoloadPaths as $p) {
   if (is_file($p)) { $autoload = $p; break; }
 }
 if (!$autoload) {
+  log_err('Autoload not found. Tried: ' . implode(', ', $autoloadPaths));
   http_response_code(500);
-  header('Content-Type: application/json');
-  echo json_encode(['error' => 'Composer autoload not found. Install PHPMailer via Composer in the web root (vendor/autoload.php).']);
+  echo json_encode(['error' => 'Composer autoload not found']);
   exit;
 }
 require $autoload;
@@ -51,7 +60,6 @@ $message = isset($data['message']) ? trim((string)$data['message']) : '';
 
 if ($name === '' || $fromEmail === '' || $subject === '' || $message === '') {
   http_response_code(400);
-  header('Content-Type: application/json');
   echo json_encode(['error' => 'Invalid payload']);
   exit;
 }
@@ -66,9 +74,9 @@ $to   = getenv('CONTACT_TO') ?: $user;
 $from = getenv('CONTACT_FROM') ?: $user;
 
 if (!$host || !$user || !$pass || !$to || !$from) {
+  log_err('SMTP config missing: host=' . ($host? 'set':'') . ', user=' . ($user? 'set':'') . ', pass=' . ($pass? 'set':'') . ', to=' . ($to? 'set':'') . ', from=' . ($from? 'set':'') );
   http_response_code(500);
-  header('Content-Type: application/json');
-  echo json_encode(['error' => 'SMTP not configured (missing SMTP_* or CONTACT_*)']);
+  echo json_encode(['error' => 'SMTP not configured']);
   exit;
 }
 
@@ -104,13 +112,21 @@ try {
   $mail->Body = $bodyHtml;
   $mail->AltBody = $bodyText;
 
+  if ($DEBUG) {
+    // Verbose debug to log file
+    $mail->SMTPDebug = 2;
+    $mail->Debugoutput = function($str) { log_err('[SMTP] ' . $str); };
+  }
+
   $mail->send();
   http_response_code(204);
   exit;
 } catch (Exception $e) {
+  log_err('Mailer error: ' . $e->getMessage());
+  if (isset($mail) && $mail->ErrorInfo) {
+    log_err('PHPMailer ErrorInfo: ' . $mail->ErrorInfo);
+  }
   http_response_code(500);
-  header('Content-Type: application/json');
-  echo json_encode(['error' => 'Mailer error', 'detail' => $mail->ErrorInfo]);
+  echo json_encode(['error' => 'Mailer error']);
   exit;
 }
-
