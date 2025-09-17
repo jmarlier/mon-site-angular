@@ -1,0 +1,55 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Combien coûte la création d’un site internet ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le prix dépend de la complexité du projet (site vitrine, application métier, développement sur mesure). Pour un site vitrine professionnel, il faut généralement compter entre X et Y €. Un devis précis est établi après échange sur votre besoin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le délai pour développer un site web ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un site vitrine peut être mis en ligne en 3 à 5 semaines. Pour une application métier ou un outil sur mesure, le délai varie selon le périmètre, de quelques semaines à plusieurs mois."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre travailler avec un freelance et une agence web ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Avec un freelance, vous bénéficiez d’un interlocuteur unique, d’une grande réactivité et souvent d’un budget plus accessible, tout en conservant une approche qualité et résultat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Proposez-vous la maintenance après la mise en ligne ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, un suivi technique est proposé avec mises à jour, correctifs de sécurité et support, afin d’assurer la stabilité et la performance de votre site."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mon site sera-t-il optimisé pour le référencement (SEO) ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, les bonnes pratiques SEO sont intégrées dès la conception : structure claire, balisage, performance et compatibilité mobile, avec métadonnées adaptées."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Travaillez-vous uniquement en Auvergne-Rhône-Alpes ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Je suis basé en Auvergne-Rhône-Alpes, mais j’accompagne des clients dans toute la France grâce aux outils de collaboration à distance."
+      }
+    }
+  ]
+}
+
