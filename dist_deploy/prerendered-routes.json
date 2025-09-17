@@ -1,10 +1,3 @@
 {
-  "routes": {
-    "/": {},
-    "/about": {},
-    "/contact": {},
-    "/legal": {},
-    "/portfolio": {},
-    "/skills": {}
-  }
+  "routes": {}
 }
