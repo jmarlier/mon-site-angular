@@ -13,7 +13,7 @@ RewriteRule ^(.*)$ https://jeromemarlier.com/$1 [L,R=301]
 #    Remplacez SMTP_* par vos valeurs réelles (o2switch cPanel > Comptes email)
 SetEnv SMTP_HOST mail.jeromemarlier.com
 SetEnv SMTP_PORT 465
-SetEnv SMTP_SECURE tls
+SetEnv SMTP_SECURE ssl
 SetEnv SMTP_USER no-reply@jeromemarlier.com
 SetEnv SMTP_PASS s6Mh3rRby3siRkY
 

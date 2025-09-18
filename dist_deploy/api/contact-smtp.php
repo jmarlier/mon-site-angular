@@ -82,6 +82,14 @@ if ($name === '' || $fromEmail === '' || $subject === '' || $message === '') {
   exit;
 }
 
+// Email format validation (server-side)
+if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
+  http_response_code(400);
+  echo json_encode(['error' => 'Invalid email format']);
+  log_err('Invalid email format: ' . $fromEmail);
+  exit;
+}
+
 // SMTP config from env
 $host = getenv('SMTP_HOST') ?: '';
 $port = (int)(getenv('SMTP_PORT') ?: 587);
