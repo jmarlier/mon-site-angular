@@ -12,7 +12,7 @@ RewriteRule ^(.*)$ https://jeromemarlier.com/$1 [L,R=301]
 #    Le script public/api/contact-smtp.php lit ces variables via getenv()
 #    Remplacez SMTP_* par vos valeurs réelles (o2switch cPanel > Comptes email)
 SetEnv SMTP_HOST mail.jeromemarlier.com
-SetEnv SMTP_PORT 587
+SetEnv SMTP_PORT 465
 SetEnv SMTP_SECURE tls
 SetEnv SMTP_USER no-reply@jeromemarlier.com
 SetEnv SMTP_PASS s6Mh3rRby3siRkY
