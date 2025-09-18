@@ -38,8 +38,26 @@ if (!$autoload) {
 }
 require $autoload;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// Ensure PHPMailer classes are available; fallback to manual includes if autoload is misconfigured
+$phClass = '\\PHPMailer\\PHPMailer\\PHPMailer';
+if (!class_exists($phClass)) {
+  // Try manual load from Composer vendor dir
+  $vendorDir = dirname($autoload);
+  $candidates = [
+    $vendorDir . '/phpmailer/phpmailer/src/PHPMailer.php',
+    $vendorDir . '/phpmailer/phpmailer/src/SMTP.php',
+    $vendorDir . '/phpmailer/phpmailer/src/Exception.php',
+  ];
+  foreach ($candidates as $file) {
+    if (is_file($file)) { require_once $file; }
+  }
+}
+if (!class_exists($phClass)) {
+  log_err('PHPMailer classes not found after autoload and manual include. vendorDir=' . (isset($vendorDir)?$vendorDir:'?'));
+  http_response_code(500);
+  echo json_encode(['error' => 'PHPMailer not available (autoload)']);
+  exit;
+}
 
 // Read JSON payload (fallback to form-encoded)
 $raw = file_get_contents('php://input');
@@ -92,7 +110,7 @@ $bodyHtml = '<div>'
   . '</pre></div>';
 
 // Send via PHPMailer SMTP
-$mail = new PHPMailer(true);
+$mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 try {
   $mail->CharSet = 'UTF-8';
   $mail->isSMTP();
@@ -121,9 +139,9 @@ try {
   $mail->send();
   http_response_code(204);
   exit;
-} catch (Exception $e) {
+} catch (\Throwable $e) {
   log_err('Mailer error: ' . $e->getMessage());
-  if (isset($mail) && $mail->ErrorInfo) {
+  if (isset($mail) && property_exists($mail, 'ErrorInfo') && $mail->ErrorInfo) {
     log_err('PHPMailer ErrorInfo: ' . $mail->ErrorInfo);
   }
   http_response_code(500);
