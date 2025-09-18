@@ -14,8 +14,8 @@ RewriteRule ^(.*)$ https://jeromemarlier.com/$1 [L,R=301]
 SetEnv SMTP_HOST mail.jeromemarlier.com
 SetEnv SMTP_PORT 465
 SetEnv SMTP_SECURE ssl
-SetEnv SMTP_USER no-reply@jeromemarlier.com
-SetEnv SMTP_PASS s6Mh3rRby3siRkY
+SetEnv SMTP_USER info@jeromemarlier.com
+SetEnv SMTP_PASS hO~BlX@=UGZK
 
 # Expéditeur et destinataire par défaut
 SetEnv CONTACT_FROM info@jeromemarlier.com
