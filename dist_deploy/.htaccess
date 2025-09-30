@@ -57,3 +57,20 @@ SetEnv CONTACT_TO info@jeromemarlier.com
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set X-XSS-Protection "0"
 </IfModule>
+
+# 8) Mode maintenance (toggle simple)
+# Activez l'un des triggers suivants pour rediriger vers /maintenance.html :
+#  - Définir l'env MAINTENANCE=on (ligne ci-dessous décommentée)
+#  - OU créer un fichier vide `maintenance.enable` à la racine du site
+# Exemple d'activation via env :
+# SetEnv MAINTENANCE on
+RewriteCond %{ENV:MAINTENANCE} =on [OR]
+RewriteCond %{DOCUMENT_ROOT}/maintenance.enable -f
+# Exclusions: page de maintenance elle-même, API, fichiers réels, assets statiques
+RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Ne pas intercepter assets courants (laisser servir directement si demandés)
+RewriteCond %{REQUEST_URI} !\.(?:css|js|png|jpe?g|svg|ico|webp|avif)$ [NC]
+RewriteRule ^ /maintenance.html [L]
