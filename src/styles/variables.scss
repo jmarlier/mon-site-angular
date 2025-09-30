@@ -5,7 +5,7 @@
 // === Polices
 $font-main: 'Inter', sans-serif;
 $font-code-light: 'JetBrains Mono', monospace; // code (thème clair)
-$font-code-dark: 'Fira Code', monospace;       // code (thème sombre)
+$font-code-dark: 'Fira Code', monospace; // code (thème sombre)
 $font-size-base: 16px;
 $line-height-base: 1.6;
 
@@ -14,6 +14,19 @@ $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
+
+// Map de breakpoints (pour mixins)
+$breakpoints: (
+  'sm': $breakpoint-sm,
+  'md': $breakpoint-md,
+  'lg': $breakpoint-lg,
+  'xl': $breakpoint-xl,
+);
+
+// Largeurs de conteneur
+$container-max: 1200px;
+$container-padding-min: 1rem; // mobile
+$container-padding-max: 3rem; // grands écrans
 
 // === Spacings
 $spacing-xs: 0.5rem;
@@ -33,7 +46,7 @@ $color-success: #10B981;
 // Variables non liées au thème (toujours disponibles)
 :root {
   --surbar-height: 40px; // hauteur de la surbar en haut
-  --surbar-border: 1px;  // épaisseur de la bordure de la surbar
+  --surbar-border: 1px; // épaisseur de la bordure de la surbar
 }
 
 // Thème clair — Tech Moderne
@@ -49,16 +62,16 @@ $color-success: #10B981;
 
   --color-secondary: #1D4ED8;
   --radius-base: 8px;
-  --shadow-subtle: 0 4px 10px rgba(59,130,246,0.08);
-  --shadow-medium: 0 8px 20px rgba(59,130,246,0.12);
-  --shadow-glow: 0 0 0 rgba(0,0,0,0);
+  --shadow-subtle: 0 4px 10px rgba(59, 130, 246, 0.08);
+  --shadow-medium: 0 8px 20px rgba(59, 130, 246, 0.12);
+  --shadow-glow: 0 0 0 rgba(0, 0, 0, 0);
 
   /* Boutons */
   --btn-primary-bg: linear-gradient(90deg, #3B82F6, #1D4ED8);
   --btn-primary-color: #ffffff;
   --btn-primary-border: transparent;
   --btn-primary-hover-bg: linear-gradient(90deg, #1D4ED8, #1E40AF);
-  --btn-primary-hover-shadow: 0 8px 20px rgba(59,130,246,0.25);
+  --btn-primary-hover-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
 
   --btn-secondary-border: var(--color-accent);
   --btn-secondary-color: var(--color-accent);
@@ -73,25 +86,25 @@ $color-success: #10B981;
 :root[data-theme='dark'] {
   --color-bg: #0A0A0B;
   --color-text: #FFFFFF;
-  --color-primary: #FBBF24;
-  --color-accent: #8B5CF6;
+  --color-primary: #dda005;
+  --color-accent: #0022ff;
   --color-muted: #A1A1AA;
   --color-border: #333333;
   --color-bg-alt: #1A1A1B;
   --icon-filter: invert(1) brightness(1.25);
 
-  --color-secondary: #F59E0B;
+  --color-secondary: #c78007;
   --radius-base: 8px;
-  --shadow-subtle: 0 2px 6px rgba(0,0,0,0.25);
-  --shadow-medium: 0 6px 18px rgba(0,0,0,0.35);
-  --shadow-glow: 0 0 16px rgba(251,191,36,0.5);
+  --shadow-subtle: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-medium: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 16px rgba(251, 191, 36, 0.5);
 
   /* Boutons */
   --btn-primary-bg: transparent;
-  --btn-primary-color: #FBBF24;
-  --btn-primary-border: #FBBF24;
-  --btn-primary-hover-bg: #FBBF24;
-  --btn-primary-hover-shadow: 0 0 24px rgba(251,191,36,0.45);
+  --btn-primary-color: #dda005;
+  --btn-primary-border: #dda005;
+  --btn-primary-hover-bg: #dda005;
+  --btn-primary-hover-shadow: 0 0 24px rgba(251, 191, 36, 0.45);
 
   --btn-secondary-border: var(--color-accent);
   --btn-secondary-color: var(--color-accent);
@@ -99,5 +112,5 @@ $color-success: #10B981;
   --btn-secondary-hover-color: #0A0A0B;
 
   /* Surbar */
-  --surbar-gradient: linear-gradient(90deg, color-mix(in oklab, #FBBF24 18%, var(--color-bg)), var(--color-bg));
+  --surbar-gradient: linear-gradient(90deg, color-mix(in oklab, #dda005 18%, var(--color-bg)), var(--color-bg));
 }

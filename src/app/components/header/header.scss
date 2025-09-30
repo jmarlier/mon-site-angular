@@ -3,7 +3,9 @@
 .main-header {
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
-    padding: 1rem 2rem;
+    padding: clamp(.75rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+    padding-left: calc(clamp(1rem, 4vw, 2rem) + env(safe-area-inset-left));
+    padding-right: calc(clamp(1rem, 4vw, 2rem) + env(safe-area-inset-right));
     transition: padding 0.2s ease;
 
     .container {
@@ -16,47 +18,45 @@
     }
 
     .logo {
-        font-family: 'Courier New', monospace;
-        font-size: 2.5rem;
-        color: #0ff;
-        text-shadow:
-            0 0 5px #0ff,
-            0 0 10px #0ff,
-            0 0 20px #0ff,
-            0 0 40px #0ff;
-        animation: flicker 1.5s infinite alternate;
-        transition: font-size 0.2s ease, text-shadow 0.2s ease;
+        a {
+            display: inline-flex;
+            align-items: center;
+            gap: .75rem;
+            color: var(--color-text);
+            text-decoration: none;
+        }
 
-        @keyframes flicker {
-            0% {
-                opacity: 1;
-                text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
-            }
+        img {
+            width: 40px;
+            height: 40px;
+            display: block;
+            border-radius: var(--radius-base, 8px);
+        }
 
-            50% {
-                opacity: 0.9;
-                text-shadow: 0 0 10px #0ff, 0 0 30px #0ff, 0 0 50px #0ff;
-            }
-
-            100% {
-                opacity: 1;
-                text-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 25px #0ff;
-            }
+        .wordmark {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: .02em;
+            color: var(--color-text);
         }
     }
 
     .menu-icon {
         cursor: pointer;
         display: none;
-        padding: .25rem;
-        border-radius: var(--radius-base, 8px);
+        padding: .5rem;
+        border-radius: var(--radius-base, 10px);
         border: 1px solid transparent;
+        min-width: 44px;
+        /* large tap target */
+        min-height: 44px;
 
         .burger {
             display: inline-flex;
             flex-direction: column;
             gap: 5px;
         }
+
         .bar {
             width: 28px;
             height: 2px;
@@ -85,7 +85,11 @@
             font-weight: 500;
             padding: 0.5rem 0;
             transition: color 0.3s ease;
-            &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+            &:focus-visible {
+                outline: 2px solid var(--color-primary);
+                outline-offset: 2px;
+            }
 
             &.active {
                 color: var(--color-primary);
@@ -118,34 +122,43 @@
 .main-header.shrink {
     padding: 0.5rem 1.25rem;
 
-    .logo {
-        font-size: 1.5rem;
-        text-shadow:
-            0 0 4px #0ff,
-            0 0 8px #0ff,
-            0 0 12px #0ff;
+    .logo img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .logo .wordmark {
+        font-size: .95rem;
     }
 
     // Keep gap stable to avoid layout shift
-    .nav-menu { gap: 2rem; }
+    .nav-menu {
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 768px) {
-    .menu-icon {
+    .main-header .menu-icon {
         display: block;
     }
 
     // Mobile: menu masqué par défaut, visible au toggle
-    .nav-menu {
+    .main-header .nav-menu {
         display: none;
         flex-direction: column;
-        gap: 1.2rem;
-        margin-top: 1rem;
+        gap:0px;
+        margin-top: 0;
+        width: 100%;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        z-index: 1001;
         background: var(--color-bg);
         border: 1px solid var(--color-border);
-        border-radius: var(--radius-base, 8px);
-        padding: 1rem;
-        box-shadow: var(--shadow-subtle);
+        border-radius: var(--radius-base, 12px);
+        padding: .75rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
         transform: translateY(-6px);
         opacity: 0;
         transition: transform .2s ease, opacity .2s ease;
@@ -153,8 +166,12 @@
         a {
             font-size: 1.1rem;
             color: var(--color-text);
-            padding-bottom: 5px;
-            &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+            padding: .5rem 0;
+
+            &:focus-visible {
+                outline: 2px solid var(--color-primary);
+                outline-offset: 2px;
+            }
 
             &.active {
                 color: var(--color-primary);
@@ -166,30 +183,65 @@
         }
 
         .underline {
-            position: absolute;
-            bottom: 0;
-            height: 2px;
-            background-color: var(--color-primary);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            transform-origin: center;
-            left: 0;
-            width: 100px;
-            transform: translateX(0) scaleX(1);
-            pointer-events: none;
+            display: none;
         }
     }
 
     // Checkbox hack pour afficher le menu
-    .menu-toggle:checked ~ .nav-menu {
+    .main-header .menu-toggle:checked~.nav-menu {
         display: flex;
         transform: translateY(0);
         opacity: 1;
+        max-height: min(70vh, 480px);
+        overflow-y: auto;
     }
 
     /* Animation burger en croix */
-    .menu-toggle:checked + .menu-icon .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .menu-toggle:checked + .menu-icon .bar:nth-child(2) { opacity: 0; }
-    .menu-toggle:checked + .menu-icon .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .main-header .menu-toggle:checked+.menu-icon .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .main-header .menu-toggle:checked+.menu-icon .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .main-header .menu-toggle:checked+.menu-icon .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
+
+/* Réduire la hauteur du header sur mobile */
+@media (max-width: 768px) {
+    .main-header {
+        padding: .5rem 1rem;
+    }
+
+    .main-header .logo img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .main-header .logo .wordmark {
+        font-size: .95rem;
+    }
+}
+
+/* Very small screens: hide wordmark to keep layout tidy */
+@media (max-width: 360px) {
+    .main-header .logo .wordmark {
+        display: none;
+    }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .main-header .nav-menu .underline {
+        transition: none;
+    }
+
+    .main-header .menu-icon .bar {
+        transition: none;
+    }
 }
 
 .theme-toggle {
@@ -200,7 +252,11 @@
     padding: 0.4rem;
     display: flex;
     align-items: center;
-    &:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
 
     img {
         width: 24px;

@@ -3,25 +3,19 @@
 // ==========================
 
 @use './variables' as *;
+@use './mixins' as *;
 
 // === Conteneur principal
 .container {
-  max-width: 1200px;
+  max-width: $container-max;
   margin: 0 auto;
-  padding: 0 $spacing-sm;
-
-  @media (min-width: $breakpoint-md) {
-    padding: 0 $spacing-md;
-  }
-
-  @media (min-width: $breakpoint-xl) {
-    padding: 0 $spacing-lg;
-  }
+  padding-left: clamp(#{$container-padding-min}, 3vw, #{$container-padding-max});
+  padding-right: clamp(#{$container-padding-min}, 3vw, #{$container-padding-max});
 }
 
 // === Grilles de section
 .section {
-  padding: $spacing-xl 0;
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
 
   &.light {
     background-color: var(--color-bg);
@@ -53,14 +47,97 @@
 }
 
 // === Espacement utilitaires
-.mt-0    { margin-top: 0 !important; }
-.mt-sm   { margin-top: $spacing-sm !important; }
-.mt-md   { margin-top: $spacing-md !important; }
-.mt-lg   { margin-top: $spacing-lg !important; }
-.mt-xl   { margin-top: $spacing-xl !important; }
+.mt-0 {
+  margin-top: 0 !important;
+}
 
-.mb-0    { margin-bottom: 0 !important; }
-.mb-sm   { margin-bottom: $spacing-sm !important; }
-.mb-md   { margin-bottom: $spacing-md !important; }
-.mb-lg   { margin-bottom: $spacing-lg !important; }
-.mb-xl   { margin-bottom: $spacing-xl !important; }
+.mt-sm {
+  margin-top: $spacing-sm !important;
+}
+
+.mt-md {
+  margin-top: $spacing-md !important;
+}
+
+.mt-lg {
+  margin-top: $spacing-lg !important;
+}
+
+.mt-xl {
+  margin-top: $spacing-xl !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-sm {
+  margin-bottom: $spacing-sm !important;
+}
+
+.mb-md {
+  margin-bottom: $spacing-md !important;
+}
+
+.mb-lg {
+  margin-bottom: $spacing-lg !important;
+}
+
+.mb-xl {
+  margin-bottom: $spacing-xl !important;
+}
+
+// === Grille utilitaire (CSS Grid) ===
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+// Colonnes fluides avec minmax
+.grid-auto {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+// Variantes explicites
+.grid-2 {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: $breakpoint-lg) {
+  .grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

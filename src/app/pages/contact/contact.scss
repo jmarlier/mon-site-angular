@@ -55,6 +55,11 @@
                 outline: none;
             }
 
+            &.invalid {
+                border-color: #e63946; /* rouge erreur */
+                box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
+            }
+
             &::placeholder {
                 color: var(--color-muted);
                 opacity: 1;
@@ -103,6 +108,14 @@
         &.error {
             color: $color-danger;
         }
+    }
+
+    .field-error {
+        display: block;
+        min-height: 1.25rem;
+        margin-top: .35rem;
+        font-size: .9rem;
+        color: #e63946; /* cohérence avec bordure erreur */
     }
 
     // Petit effet d’apparition

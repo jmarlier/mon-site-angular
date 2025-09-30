@@ -10,7 +10,7 @@
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.6s ease, transform 0.6s ease;
-  
+
 
   &.visible {
     opacity: 1;
@@ -50,13 +50,16 @@
   .footer-meta {
     margin: 0 0 0.75rem;
     color: var(--color-muted);
-    a { color: var(--color-accent); }
+
+    a {
+      color: var(--color-accent);
+    }
   }
 
   .scroll-top {
     position: fixed;
-    bottom: 2rem;
-    right: 5rem;
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    right: calc(4.5rem + env(safe-area-inset-right));
     background: var(--color-accent);
     color: var(--color-bg);
     border: none;
@@ -87,7 +90,7 @@
 
 .footer-fixed {
   position: fixed;
-  bottom: 1rem; 
+  bottom: 1rem;
   color: var(--color-text);
   font-size: 0.9rem;
   z-index: 95;
@@ -104,11 +107,18 @@
     height: 26px;
     filter: var(--icon-filter);
     transition: transform 0.3s ease;
-    &:hover { transform: scale(1.2); }
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }
 
 .footer-left {
+  background-color: var(--color-bg);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
   left: 1rem;
 }
 
@@ -118,27 +128,32 @@
   flex-direction: column;
   gap: 0.75rem;
   align-items: center;
-  
-    .follow-text {
-      writing-mode: vertical-rl;
-      font-size: 0.85rem;
-      color: var(--color-muted);
-      opacity: 0.7;
-      white-space: nowrap; // évite le retour à la ligne sur mobile
-    }
-        /* La ligne entre le texte et les logos */
-    .separator {
-      width: 1px;                                  /* ligne verticale */
-      height: var(--social-sep-height, 48px);      /* ajustable */
-      background: var(--color-muted);
-      opacity: 0.5;
-      pointer-events: none;                        /* n’intercepte pas les clics */
-    }
+
+  .follow-text {
+    writing-mode: vertical-rl;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    opacity: 0.7;
+    white-space: nowrap; // évite le retour à la ligne sur mobile
+  }
+
+  /* La ligne entre le texte et les logos */
+  .separator {
+    width: 1px;
+    /* ligne verticale */
+    height: var(--social-sep-height, 48px);
+    /* ajustable */
+    background: var(--color-muted);
+    opacity: 0.5;
+    pointer-events: none;
+    /* n’intercepte pas les clics */
+  }
 
 }
 
 /* Responsive : cacher le texte + la ligne sur mobile */
 @media (max-width: 768px) {
+
   .footer-right .follow-text,
   .footer-right .separator {
     display: none;

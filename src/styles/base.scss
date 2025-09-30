@@ -4,6 +4,7 @@
 
 @use 'sass:color';
 @use './variables' as *;
+@use './mixins' as *;
 
 
 *,
@@ -40,11 +41,15 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 600;
+    font-weight: 700;
     margin-top: 0;
     margin-bottom: 0.5rem;
     color: var(--color-primary);
 }
+
+h1 { @include fluid-type(1.9rem, 2.6rem); }
+h2 { @include fluid-type(1.6rem, 2.2rem); }
+h3 { @include fluid-type(1.3rem, 1.6rem); }
 
 p {
     margin-top: 0;
@@ -76,3 +81,9 @@ html[data-theme='dark'] code,
 html[data-theme='dark'] pre,
 html[data-theme='dark'] kbd,
 html[data-theme='dark'] samp { font-family: $font-code-dark; }
+
+/* Media elements responsive by default */
+img, video, svg, canvas {
+  max-width: 100%;
+  height: auto;
+}

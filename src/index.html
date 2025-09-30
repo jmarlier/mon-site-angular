@@ -32,7 +32,7 @@
 
   <!-- Basic CSP; en production, mieux via HTTP headers -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self';" />
+    content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https:;" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,8 +44,29 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
 
-  <!-- JSON-LD LocalBusiness + Person (chargé via fichier pour respecter la CSP) -->
-  <script type="application/ld+json" src="/schema.json"></script>
+  <!-- JSON-LD Person (inline pour SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jérôme Marlier",
+    "jobTitle": "Développeur Web Freelance",
+    "url": "https://jeromemarlier.com/",
+    "image": "https://jeromemarlier.com/img/og-cover.svg",
+    "sameAs": [
+      "https://github.com/jmarlier",
+      "https://www.linkedin.com/in/jeromemarlier"
+    ],
+    "knowsAbout": [
+      "Angular", "TypeScript", "Symfony", "PHP", "API REST", "SEO", "Design System", "Performance Web"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Auvergne–Rhône–Alpes",
+      "addressCountry": "FR"
+    }
+  }
+  </script>
 </head>
 
 <body>

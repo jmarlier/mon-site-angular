@@ -1,6 +1,6 @@
 .about {
   background: var(--color-bg);
-  padding: 5rem 2rem;
+  padding: clamp(3rem, 7vw, 5rem) clamp(1rem, 4vw, 2rem);
   color: var(--color-text);
 
   .about-grid {
@@ -14,13 +14,13 @@
 
   .about-text {
     h2 {
-      font-size: 2.2rem;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
       margin: 0 0 1.5rem;
       color: var(--color-primary);
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
       line-height: 1.8;
       margin-bottom: 1.2rem;
       color: var(--color-text);
@@ -71,6 +71,13 @@
     }
   }
 
+  // Décalage de la photo: +50px à droite, -50px en haut (desktop et +)
+  @media (min-width: 900px) {
+    .about-photo img {
+      transform: translate(100px, -100px);
+    }
+  }
+
   // Fine-tune on dark theme to keep subject readable
   html[data-theme='dark'] & {
     .about-photo img {
@@ -93,6 +100,7 @@
     }
   }
 }
+
 .about-text {
   .subtitle {
     font-size: 1.1rem;

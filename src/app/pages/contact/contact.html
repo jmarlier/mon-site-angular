@@ -2,7 +2,7 @@
   <h2>Me contacter</h2>
   <p class="intro">Parlez‑moi de votre projet (réponse sous 24–48h).</p>
 
-  <form #contactForm="ngForm" (ngSubmit)="sendEmail(contactForm)">
+  <form #contactForm="ngForm" (ngSubmit)="sendEmail(contactForm)" novalidate>
     <div>
       <label for="name">Nom</label>
       <input type="text" id="name" name="name" ngModel required />
@@ -10,7 +10,27 @@
 
     <div>
       <label for="user_email">Email</label>
-      <input type="email" id="user_email" name="user_email" ngModel required />
+      <input
+        type="email"
+        id="user_email"
+        name="user_email"
+        ngModel
+        required
+        email
+        pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+        autocomplete="email"
+        #userEmail="ngModel"
+        [class.invalid]="userEmail.invalid && (userEmail.dirty || userEmail.touched)"
+        [attr.aria-invalid]="userEmail.invalid ? 'true' : null"
+        [attr.aria-describedby]="userEmail.invalid ? 'email-error' : null"
+      />
+      <small id="email-error" class="field-error" role="status" aria-live="polite">
+        <ng-container *ngIf="userEmail.errors as e">
+          <span *ngIf="e['email'] && userEmail.dirty">Le format de l’adresse email est invalide.</span>
+          <span *ngIf="e['pattern'] && userEmail.dirty">L’adresse doit contenir un domaine valide (ex. .com, .fr).</span>
+          <span *ngIf="e['required'] && (userEmail.touched || contactForm.submitted)">L’email est requis.</span>
+        </ng-container>
+      </small>
     </div>
 
     <div>
@@ -28,9 +48,19 @@
       <textarea id="message" name="message" ngModel required></textarea>
     </div>
 
-    <button type="submit" [disabled]="contactForm.invalid">Envoyer</button>
+    <!-- Honeypot anti-bot (doit rester vide) -->
+    <div aria-hidden="true" style="position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden;">
+      <label for="company">Société</label>
+      <input id="company" name="company" [(ngModel)]="botField" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <button type="submit" [disabled]="contactForm.invalid || sending" class="btn btn-primary">
+      {{ sending ? 'Envoi…' : 'Envoyer' }}
+    </button>
   </form>
 
   <p *ngIf="messageSent" class="success">✅ Message envoyé avec succès !</p>
   <p *ngIf="messageError" class="error">❌ Une erreur est survenue.</p>
+
+  <p class="muted">Vous voulez en savoir plus sur mes services ? <a routerLink="/portfolio">Voir les prestations</a>.</p>
 </div>
