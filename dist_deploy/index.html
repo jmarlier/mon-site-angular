@@ -41,6 +41,39 @@
 
   <!-- Cookiebot (RGPD Consent) -->
   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8a592ec2-ef8c-4395-b0f8-c848fe826aeb" type="text/javascript" async></script>
+  
+  <!-- Script pour gérer le positionnement avec Cookiebot -->
+  <script>
+    // Attendre que Cookiebot soit chargé
+    document.addEventListener('DOMContentLoaded', function() {
+      // Observer les changements du widget Cookiebot
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList') {
+            const cookiebotWidget = document.getElementById('CookiebotWidget');
+            if (cookiebotWidget) {
+              document.body.classList.add('cookiebot-visible');
+            } else {
+              document.body.classList.remove('cookiebot-visible');
+            }
+          }
+        });
+      });
+      
+      // Observer le body pour détecter l'apparition/disparition du widget
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+      
+      // Vérifier immédiatement si le widget est déjà présent
+      setTimeout(function() {
+        if (document.getElementById('CookiebotWidget')) {
+          document.body.classList.add('cookiebot-visible');
+        }
+      }, 1000);
+    });
+  </script>
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-00H58WEQKE"></script>
@@ -81,10 +114,10 @@
     }
   }
   </script>
-<style>:root{--surbar-height:40px;--surbar-border:1px}*,*:before,*:after{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Inter,sans-serif;font-size:16px;line-height:1.6;background-color:var(--color-bg);color:var(--color-text);scroll-behavior:smooth;transition:background-color .3s ease,color .3s ease}html,body{background-color:var(--color-bg);color:var(--color-text)}body{padding-top:0}:root{--neon-cyan:#00ffff;--neon-blue:#0066cc;--neon-blue-hover:#0088ff;--neon-color:var(--neon-cyan)}</style><link rel="stylesheet" href="styles-YNXLA2BM.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-YNXLA2BM.css"></noscript></head>
+<style>:root{--surbar-height:40px;--surbar-border:1px}*,*:before,*:after{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Inter,sans-serif;font-size:16px;line-height:1.6;background-color:var(--color-bg);color:var(--color-text);scroll-behavior:smooth;transition:background-color .3s ease,color .3s ease}html,body{background-color:var(--color-bg);color:var(--color-text)}body{padding-top:0}:root{--neon-cyan:#00ffff;--neon-blue:#0066cc;--neon-blue-hover:#0088ff;--neon-color:var(--neon-cyan)}</style><link rel="stylesheet" href="styles-WOH7IIUQ.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-WOH7IIUQ.css"></noscript></head>
 
 <body>
   <app-root></app-root>
-<link rel="modulepreload" href="chunk-C35C5X5H.js"><link rel="modulepreload" href="chunk-DBHD2J3R.js"><link rel="modulepreload" href="chunk-UKUVPTDO.js"><link rel="modulepreload" href="chunk-MJLWR4MA.js"><script src="polyfills-5CFQRCPP.js" type="module"></script><script src="main-EHPYXKOF.js" type="module"></script></body>
+<link rel="modulepreload" href="chunk-C35C5X5H.js"><link rel="modulepreload" href="chunk-DBHD2J3R.js"><link rel="modulepreload" href="chunk-UKUVPTDO.js"><link rel="modulepreload" href="chunk-MJLWR4MA.js"><script src="polyfills-5CFQRCPP.js" type="module"></script><script src="main-M3DC3Y73.js" type="module"></script></body>
 
 </html>
