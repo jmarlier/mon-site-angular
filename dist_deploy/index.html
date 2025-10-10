@@ -41,14 +41,14 @@
 
   <!-- Cookiebot (RGPD Consent) -->
   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8a592ec2-ef8c-4395-b0f8-c848fe826aeb" type="text/javascript" async></script>
-  
+
   <!-- Script pour gérer le positionnement avec Cookiebot -->
   <script>
     // Attendre que Cookiebot soit chargé
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Observer les changements du widget Cookiebot
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
           if (mutation.type === 'childList') {
             const cookiebotWidget = document.getElementById('CookiebotWidget');
             if (cookiebotWidget) {
@@ -59,15 +59,15 @@
           }
         });
       });
-      
+
       // Observer le body pour détecter l'apparition/disparition du widget
       observer.observe(document.body, {
         childList: true,
         subtree: true
       });
-      
+
       // Vérifier immédiatement si le widget est déjà présent
-      setTimeout(function() {
+      setTimeout(function () {
         if (document.getElementById('CookiebotWidget')) {
           document.body.classList.add('cookiebot-visible');
         }
