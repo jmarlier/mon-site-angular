@@ -11,14 +11,14 @@ RewriteRule ^(.*)$ https://jeromemarlier.com/$1 [L,R=301]
 # 3) Variables d'environnement pour l'API PHP de contact (PHPMailer SMTP)
 #    Le script public/api/contact-smtp.php lit ces variables via getenv()
 #    Remplacez SMTP_* par vos valeurs réelles (o2switch cPanel > Comptes email)
-SetEnv SMTP_HOST mail.jeromemarlier.com
+SetEnv SMTP_HOST cocotier.o2switch.net
 SetEnv SMTP_PORT 465
 SetEnv SMTP_SECURE ssl
 SetEnv SMTP_USER info@jeromemarlier.com
-SetEnv SMTP_PASS hO~BlX@=UGZK
+SetEnv SMTP_PASS 5s6Mh3rRby3siRkY
 
 # Expéditeur et destinataire par défaut
-SetEnv CONTACT_FROM info@jeromemarlier.com
+SetEnv CONTACT_FROM no-reply@jeromemarlier.com
 SetEnv CONTACT_TO info@jeromemarlier.com
 
 # 4) SPA fallback vers index.html (laisse passer les fichiers réels comme /api/contact.php)
