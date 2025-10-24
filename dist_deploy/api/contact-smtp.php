@@ -7,9 +7,52 @@ header('Content-Type: application/json; charset=UTF-8');
 // Debug/trace helper (logs to api/mail-error.log)
 $LOG_FILE = __DIR__ . '/mail-error.log';
 $DEBUG = (isset($_GET['debug']) && $_GET['debug'] === '1') || strtolower((string)getenv('APP_ENV')) === 'dev';
-function log_err($msg) {
+function log_err($msg)
+{
   global $LOG_FILE;
   @file_put_contents($LOG_FILE, '[' . date('c') . "] " . $msg . "\n", FILE_APPEND);
+}
+
+// Load .env file manually
+function loadEnv($path)
+{
+  if (!file_exists($path)) {
+    return false;
+  }
+
+  $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  foreach ($lines as $line) {
+    if (strpos(trim($line), '#') === 0) {
+      continue; // Skip comments
+    }
+
+    if (strpos($line, '=') !== false) {
+      list($name, $value) = explode('=', $line, 2);
+      $name = trim($name);
+      $value = trim($value);
+
+      if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
+        putenv("$name=$value");
+        $_ENV[$name] = $value;
+        $_SERVER[$name] = $value;
+      }
+    }
+  }
+  return true;
+}
+
+// Try to load .env from different locations
+$envPaths = [
+  __DIR__ . '/../.env',           // public_html/.env
+  __DIR__ . '/.env',              // api/.env
+  __DIR__ . '/../../.env',        // root/.env
+];
+
+foreach ($envPaths as $envPath) {
+  if (loadEnv($envPath)) {
+    log_err("Loaded .env from: $envPath");
+    break;
+  }
 }
 
 // Only accept POST
@@ -28,7 +71,10 @@ $autoloadPaths = [
 ];
 $autoload = null;
 foreach ($autoloadPaths as $p) {
-  if (is_file($p)) { $autoload = $p; break; }
+  if (is_file($p)) {
+    $autoload = $p;
+    break;
+  }
 }
 if (!$autoload) {
   log_err('Autoload not found. Tried: ' . implode(', ', $autoloadPaths));
@@ -49,11 +95,13 @@ if (!class_exists($phClass)) {
     $vendorDir . '/phpmailer/phpmailer/src/Exception.php',
   ];
   foreach ($candidates as $file) {
-    if (is_file($file)) { require_once $file; }
+    if (is_file($file)) {
+      require_once $file;
+    }
   }
 }
 if (!class_exists($phClass)) {
-  log_err('PHPMailer classes not found after autoload and manual include. vendorDir=' . (isset($vendorDir)?$vendorDir:'?'));
+  log_err('PHPMailer classes not found after autoload and manual include. vendorDir=' . (isset($vendorDir) ? $vendorDir : '?'));
   http_response_code(500);
   echo json_encode(['error' => 'PHPMailer not available (autoload)']);
   exit;
@@ -62,11 +110,16 @@ if (!class_exists($phClass)) {
 // Read JSON payload (fallback to form-encoded)
 $raw = file_get_contents('php://input');
 $data = json_decode($raw ?: '', true);
-if (!is_array($data)) { $data = $_POST; }
+if (!is_array($data)) {
+  $data = $_POST;
+}
 
 // Honeypot
 $company = isset($data['company']) ? trim((string)$data['company']) : '';
-if ($company !== '') { http_response_code(204); exit; }
+if ($company !== '') {
+  http_response_code(204);
+  exit;
+}
 
 // Extract and validate
 $name = isset($data['name']) ? trim((string)$data['name']) : '';
@@ -100,7 +153,7 @@ $to   = getenv('CONTACT_TO') ?: $user;
 $from = getenv('CONTACT_FROM') ?: $user;
 
 if (!$host || !$user || !$pass || !$to || !$from) {
-  log_err('SMTP config missing: host=' . ($host? 'set':'') . ', user=' . ($user? 'set':'') . ', pass=' . ($pass? 'set':'') . ', to=' . ($to? 'set':'') . ', from=' . ($from? 'set':'') );
+  log_err('SMTP config missing: host=' . ($host ? 'set' : '') . ', user=' . ($user ? 'set' : '') . ', pass=' . ($pass ? 'set' : '') . ', to=' . ($to ? 'set' : '') . ', from=' . ($from ? 'set' : ''));
   http_response_code(500);
   echo json_encode(['error' => 'SMTP not configured']);
   exit;
@@ -124,7 +177,9 @@ try {
   $mail->isSMTP();
   $mail->Host = $host;
   $mail->Port = $port;
-  if ($secure === 'ssl' || $secure === 'tls') { $mail->SMTPSecure = $secure; }
+  if ($secure === 'ssl' || $secure === 'tls') {
+    $mail->SMTPSecure = $secure;
+  }
   $mail->SMTPAuth = true;
   $mail->Username = $user;
   $mail->Password = $pass;
@@ -141,7 +196,9 @@ try {
   if ($DEBUG) {
     // Verbose debug to log file
     $mail->SMTPDebug = 2;
-    $mail->Debugoutput = function($str) { log_err('[SMTP] ' . $str); };
+    $mail->Debugoutput = function ($str) {
+      log_err('[SMTP] ' . $str);
+    };
   }
 
   $mail->send();
