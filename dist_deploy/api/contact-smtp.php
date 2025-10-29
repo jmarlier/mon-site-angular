@@ -202,7 +202,7 @@ try {
   }
 
   $mail->send();
-  
+
   // Envoyer un accusé de réception au visiteur
   try {
     $ackMail = new \PHPMailer\PHPMailer\PHPMailer(true);
@@ -210,7 +210,9 @@ try {
     $ackMail->isSMTP();
     $ackMail->Host = $host;
     $ackMail->Port = $port;
-    if ($secure === 'ssl' || $secure === 'tls') { $ackMail->SMTPSecure = $secure; }
+    if ($secure === 'ssl' || $secure === 'tls') {
+      $ackMail->SMTPSecure = $secure;
+    }
     $ackMail->SMTPAuth = true;
     $ackMail->Username = $user;
     $ackMail->Password = $pass;
@@ -220,7 +222,7 @@ try {
 
     $ackMail->Subject = 'Confirmation de réception - ' . $subject;
     $ackMail->isHTML(true);
-    
+
     $ackBodyHtml = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #3B82F6;">Merci pour votre message !</h2>
       <p>Bonjour ' . htmlspecialchars($name, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . ',</p>
@@ -243,15 +245,17 @@ try {
         <a href="https://jeromemarlier.com" style="color: #3B82F6;">jeromemarlier.com</a>
       </p>
     </div>';
-    
+
     $ackBodyText = "Merci pour votre message !\n\nBonjour $name,\n\nJ'ai bien reçu votre message concernant : $subject\n\nJe vous répondrai dans les plus brefs délais (généralement sous 24-48h).\n\nRécapitulatif de votre message :\nSujet : $subject\nMessage :\n$message\n\nCordialement,\nJérôme Marlier\nDéveloppeur Web Freelance\njeromemarlier.com";
-    
+
     $ackMail->Body = $ackBodyHtml;
     $ackMail->AltBody = $ackBodyText;
 
     if ($DEBUG) {
       $ackMail->SMTPDebug = 2;
-      $ackMail->Debugoutput = function($str) { log_err('[ACK SMTP] ' . $str); };
+      $ackMail->Debugoutput = function ($str) {
+        log_err('[ACK SMTP] ' . $str);
+      };
     }
 
     $ackMail->send();
@@ -260,7 +264,7 @@ try {
     log_err('Erreur accusé de réception: ' . $e->getMessage());
     // Ne pas faire échouer l'envoi principal si l'accusé échoue
   }
-  
+
   http_response_code(204);
   exit;
 } catch (\Throwable $e) {

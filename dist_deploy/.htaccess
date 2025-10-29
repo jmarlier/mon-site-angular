@@ -58,6 +58,11 @@ SetEnv CONTACT_TO info@jeromemarlier.com
   Header set X-XSS-Protection "0"
 </IfModule>
 
+# 7b) Signal anti-entraînement IA
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noai, noimageai"
+</IfModule>
+
 # 8) Mode maintenance (toggle simple)
 # Activez l'un des triggers suivants pour rediriger vers /maintenance.html :
 #  - Définir l'env MAINTENANCE=on (ligne ci-dessous décommentée)
