@@ -159,3 +159,44 @@
     display: none;
   }
 }
+
+/* === CORRECTION POSITIONNEMENT COOKIEBOT === */
+
+/* Ajuster la position du widget Cookiebot pour éviter les conflits */
+#CookiebotWidget {
+  z-index: 1000 !important;
+  /* Au-dessus de nos éléments footer */
+}
+
+/* Décaller nos éléments footer quand Cookiebot est visible */
+body:has(#CookiebotWidget) .footer-fixed.footer-left {
+  bottom: 6rem !important;
+  /* Décaller vers le haut pour éviter le widget */
+}
+
+body:has(#CookiebotWidget) .scroll-top {
+  bottom: calc(6rem + env(safe-area-inset-bottom)) !important;
+}
+
+/* Alternative avec une classe CSS si :has() n'est pas supporté */
+.cookiebot-visible .footer-fixed.footer-left {
+  bottom: 6rem !important;
+}
+
+.cookiebot-visible .scroll-top {
+  bottom: calc(6rem + env(safe-area-inset-bottom)) !important;
+}
+
+/* Sur mobile, décaller encore plus pour éviter les conflits */
+@media (max-width: 768px) {
+
+  body:has(#CookiebotWidget) .footer-fixed.footer-left,
+  .cookiebot-visible .footer-fixed.footer-left {
+    bottom: 8rem !important;
+  }
+
+  body:has(#CookiebotWidget) .scroll-top,
+  .cookiebot-visible .scroll-top {
+    bottom: calc(8rem + env(safe-area-inset-bottom)) !important;
+  }
+}

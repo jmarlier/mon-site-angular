@@ -10,12 +10,12 @@ import { Title, Meta } from '@angular/platform-browser';
   styleUrls: ['./portfolio.scss']
 })
 export class Portfolio implements OnInit {
-  constructor(private title: Title, private meta: Meta) {}
+  constructor(private title: Title, private meta: Meta) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Prestations — Jérôme Marlier | Sites vitrines, Apps métier, API');
-    this.meta.updateTag({ name: 'description', content: 'Sites vitrines modernes, applications métier, espaces clients, intégration d’API, génération de PDF et maintenance.' });
-    this.meta.updateTag({ property: 'og:title', content: 'Prestations — Jérôme Marlier' });
-    this.meta.updateTag({ property: 'og:description', content: 'Services de développement web sur mesure pour PME et indépendants.' });
+    this.title.setTitle('Portfolio Création Site Internet | Développeur Freelance');
+    this.meta.updateTag({ name: 'description', content: 'Portfolio du développeur freelance : création de sites internet, applications métier, espaces clients. Exemples de réalisations web professionnelles avec intégrations API.' });
+    this.meta.updateTag({ property: 'og:title', content: 'Portfolio Création Site Internet | Développeur Freelance' });
+    this.meta.updateTag({ property: 'og:description', content: 'Découvrez mes réalisations : création de sites internet professionnels, applications métier sur mesure.' });
   }
 }

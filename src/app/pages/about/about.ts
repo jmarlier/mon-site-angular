@@ -10,11 +10,11 @@ import { Title, Meta } from '@angular/platform-browser';
   styleUrls: ['./about.scss']
 })
 export class About implements OnInit {
-  constructor(private title: Title, private meta: Meta) {}
+  constructor(private title: Title, private meta: Meta) { }
   ngOnInit(): void {
-    this.title.setTitle('À propos — Jérôme Marlier | Développeur Web Freelance');
-    this.meta.updateTag({ name: 'description', content: 'Mon parcours et mon approche: développement web sur mesure (Angular, Symfony, API, SEO), accompagnement pragmatique et orienté résultats.' });
-    this.meta.updateTag({ property: 'og:title', content: 'À propos — Jérôme Marlier' });
-    this.meta.updateTag({ property: 'og:description', content: 'Développeur web freelance — expertise Angular, Symfony, API et SEO.' });
+    this.title.setTitle('À Propos | Développeur Freelance Spécialisé Création Site');
+    this.meta.updateTag({ name: 'description', content: 'Développeur freelance avec 15 ans d\'expérience en management. Spécialisé dans la création de sites internet et applications web sur mesure. Reconversion réussie vers le développement.' });
+    this.meta.updateTag({ property: 'og:title', content: 'À Propos | Développeur Freelance Création Site' });
+    this.meta.updateTag({ property: 'og:description', content: 'Développeur freelance spécialisé création de sites internet. 15 ans d\'expérience, approche pragmatique et orientée résultats.' });
   }
 }

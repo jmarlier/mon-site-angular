@@ -1,5 +1,13 @@
 // === HEADER MODERNISÉ (stretch conservé) ===
 
+// Variables pour l'effet néon (optimisation)
+:root {
+    --neon-cyan: #00ffff;
+    --neon-blue: #0066cc;
+    --neon-blue-hover: #0088ff;
+    --neon-color: var(--neon-cyan);
+}
+
 .main-header {
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
@@ -34,10 +42,18 @@
         }
 
         .wordmark {
-            font-weight: 700;
-            font-size: 1.1rem;
+            font: 700 1.1rem/1 'JetBrains Mono', 'Fira Code', monospace;
             letter-spacing: .02em;
-            color: var(--color-text);
+            position: relative;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 15px var(--neon-color), 0 0 20px var(--neon-color), 0 0 35px var(--neon-color), 0 0 40px var(--neon-color);
+            animation: neonFlicker 3s infinite alternate;
+            transition: all 0.3s ease;
+
+            &:hover {
+                text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 15px var(--neon-color), 0 0 20px var(--neon-color), 0 0 35px var(--neon-color), 0 0 40px var(--neon-color), 0 0 50px var(--neon-color), 0 0 60px var(--neon-color);
+                transform: scale(1.02);
+            }
         }
     }
 
@@ -129,6 +145,7 @@
 
     .logo .wordmark {
         font-size: .95rem;
+        text-shadow: 0 0 3px var(--neon-color), 0 0 6px var(--neon-color), 0 0 9px var(--neon-color), 0 0 12px var(--neon-color), 0 0 18px var(--neon-color);
     }
 
     // Keep gap stable to avoid layout shift
@@ -146,7 +163,7 @@
     .main-header .nav-menu {
         display: none;
         flex-direction: column;
-        gap:0px;
+        gap: 0px;
         margin-top: 0;
         width: 100%;
         position: absolute;
@@ -270,4 +287,66 @@
     }
 
     // S'appuie uniquement sur la variable --icon-filter
+}
+
+// === NÉON OPTIMISÉ ===
+@keyframes neonFlicker {
+
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+        text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color), 0 0 15px var(--neon-color), 0 0 20px var(--neon-color), 0 0 35px var(--neon-color), 0 0 40px var(--neon-color);
+    }
+
+    20%,
+    24%,
+    55% {
+        text-shadow: 0 0 2px var(--neon-color), 0 0 4px var(--neon-color), 0 0 6px var(--neon-color), 0 0 8px var(--neon-color), 0 0 12px var(--neon-color), 0 0 22px var(--neon-color), 0 0 28px var(--neon-color);
+    }
+
+    21%,
+    23%,
+    56% {
+        text-shadow: 0 0 8px var(--neon-color), 0 0 15px var(--neon-color), 0 0 25px var(--neon-color), 0 0 30px var(--neon-color), 0 0 45px var(--neon-color), 0 0 50px var(--neon-color);
+    }
+}
+
+[data-theme="dark"] {
+    --neon-color: var(--neon-cyan);
+
+    .main-header.shrink .logo .wordmark {
+        text-shadow: 0 0 3px var(--neon-color), 0 0 6px var(--neon-color), 0 0 9px var(--neon-color), 0 0 12px var(--neon-color), 0 0 18px var(--neon-color), 0 0 25px var(--neon-color);
+    }
+}
+
+[data-theme="light"] {
+    --neon-color: var(--neon-blue);
+
+    .main-header .logo .wordmark {
+        color: var(--neon-blue);
+        text-shadow: 0 0 3px var(--neon-color), 0 0 6px var(--neon-color), 0 0 9px var(--neon-color), 0 0 12px var(--neon-color), 0 0 18px var(--neon-color);
+
+        &:hover {
+            color: var(--neon-blue-hover);
+            text-shadow: 0 0 3px var(--neon-color), 0 0 6px var(--neon-color), 0 0 9px var(--neon-color), 0 0 12px var(--neon-color), 0 0 18px var(--neon-color), 0 0 25px var(--neon-color);
+        }
+    }
+
+    .main-header.shrink .logo .wordmark {
+        text-shadow: 0 0 2px var(--neon-color), 0 0 4px var(--neon-color), 0 0 6px var(--neon-color), 0 0 8px var(--neon-color), 0 0 12px var(--neon-color);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .main-header .logo .wordmark {
+        animation: none;
+
+        &:hover {
+            transform: none;
+        }
+    }
 }

@@ -56,7 +56,8 @@
             }
 
             &.invalid {
-                border-color: #e63946; /* rouge erreur */
+                border-color: #e63946;
+                /* rouge erreur */
                 box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
             }
 
@@ -115,7 +116,57 @@
         min-height: 1.25rem;
         margin-top: .35rem;
         font-size: .9rem;
-        color: #e63946; /* cohérence avec bordure erreur */
+        color: #e63946;
+        /* cohérence avec bordure erreur */
+    }
+
+    .diagnostic-section {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background: var(--color-bg-secondary);
+        border-radius: 8px;
+        border: 1px solid var(--color-border);
+
+        .btn-secondary {
+            background-color: var(--color-muted);
+            color: var(--color-bg);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: var(--color-text);
+            }
+        }
+
+        .diagnostic-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--color-bg);
+            border-radius: 6px;
+            border: 1px solid var(--color-border);
+
+            h4 {
+                margin: 0 0 0.5rem 0;
+                font-size: 1rem;
+                color: var(--color-text);
+            }
+
+            pre {
+                margin: 0;
+                padding: 0.5rem;
+                background: #f8f9fa;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                color: #333;
+                overflow-x: auto;
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+        }
     }
 
     // Petit effet d’apparition

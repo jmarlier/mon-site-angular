@@ -19,7 +19,7 @@
   <meta property="og:title" content="Développeur Web Freelance — Jérôme Marlier" />
   <meta property="og:description"
     content="Sites vitrines, applications web et solutions sur mesure. Basé en Auvergne-Rhône-Alpes." />
-  <meta property="og:image" content="/img/og-cover.svg" />
+  <meta property="og:image" content="/img/og-cover.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Jérôme Marlier — Développeur Web Freelance" />
@@ -28,11 +28,11 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Développeur Web Freelance — Jérôme Marlier" />
   <meta name="twitter:description" content="Sites vitrines, applications web et solutions sur mesure." />
-  <meta name="twitter:image" content="/img/og-cover.svg" />
+  <meta name="twitter:image" content="/img/og-cover.png" />
 
   <!-- Basic CSP; en production, mieux via HTTP headers -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https:;" />
+    content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://consent.cookiebot.com https://consentcdn.cookiebot.com https://www.googletagmanager.com; connect-src 'self' https:; frame-src 'self' https://consentcdn.cookiebot.com;" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,6 +44,59 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
 
+  <!-- Cookiebot (RGPD Consent) -->
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="8a592ec2-ef8c-4395-b0f8-c848fe826aeb"
+    type="text/javascript" async></script>
+
+  <!-- Script pour gérer le positionnement avec Cookiebot -->
+  <script>
+    // Attendre que Cookiebot soit chargé
+    document.addEventListener('DOMContentLoaded', function () {
+      // Observer les changements du widget Cookiebot
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === 'childList') {
+            const cookiebotWidget = document.getElementById('CookiebotWidget');
+            if (cookiebotWidget) {
+              document.body.classList.add('cookiebot-visible');
+            } else {
+              document.body.classList.remove('cookiebot-visible');
+            }
+          }
+        });
+      });
+
+      // Observer le body pour détecter l'apparition/disparition du widget
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+
+      // Vérifier immédiatement si le widget est déjà présent
+      setTimeout(function () {
+        if (document.getElementById('CookiebotWidget')) {
+          document.body.classList.add('cookiebot-visible');
+        }
+      }, 1000);
+    });
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-00H58WEQKE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    // Google Analytics avec consentement
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied'
+    });
+
+    gtag('config', 'G-00H58WEQKE');
+  </script>
+
   <!-- JSON-LD Person (inline pour SEO) -->
   <script type="application/ld+json">
   {
@@ -52,7 +105,7 @@
     "name": "Jérôme Marlier",
     "jobTitle": "Développeur Web Freelance",
     "url": "https://jeromemarlier.com/",
-    "image": "https://jeromemarlier.com/img/og-cover.svg",
+    "image": "https://jeromemarlier.com/img/og-cover.png",
     "sameAs": [
       "https://github.com/jmarlier",
       "https://www.linkedin.com/in/jeromemarlier"
